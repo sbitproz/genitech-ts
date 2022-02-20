@@ -42,6 +42,7 @@ export const buildSingleParam = (v: NameVariations) => `${v.ref}: ${v.model}`;
 export const buildMultiParam = (v: NameVariations) => `${v.refs}: ${v.model}[]`;
 
 /* 
+  Example:
   const course: Schema = {
     model: "userCourse",
     model: "userCourses",

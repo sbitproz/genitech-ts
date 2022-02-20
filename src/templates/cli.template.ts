@@ -1,7 +1,6 @@
-// import { buildNameVariation } from "../util/buildBase/buildBase";
-// import { Schema } from "../interfaces/buildBase.interface";
 import { Config } from "../interfaces/buildBase.interface";
 import { translate } from "../util/buildBase/buildBase";
+import { Generator } from "../interfaces/template.interface";
 
 const generate = (config: Config) => {
   const template = `
@@ -10,9 +9,11 @@ const generate = (config: Config) => {
 
     nx generate @nrwl/js:library --name=core-state --buildable &&
 
-    {{#each entities}}
-      nx g slice {{this.refs}}Slice --project core-state &&
-    {{/each}}
+    {{#if this.data}}
+      {{#each entities}}
+        nx g slice {{this.refs}}Slice --project core-state &&
+      {{/each}}
+    {{/if}}
 
     nx generate @nrwl/js:library --name=core-types --buildable &&
 
@@ -20,9 +21,16 @@ const generate = (config: Config) => {
 
     nx generate @nrwl/js:library --name=core-auth --buildable &&
 
-    {{if observable}}
-      
-    {{endif}}
+    {{#if this.data}}
+      yarn add axios &&
+
+      {{#if this.observable}}
+        yarn add rxjs &&
+      {{/if}}  
+    {{/if}}
+
+    yarn add @reduxjs/toolkit &&
+    yarn add react-redux
   `
 
   return {
@@ -32,16 +40,8 @@ const generate = (config: Config) => {
   };
 };
 
-interface GenerateReturn {
-  template: string;
-  title: string;
-  fileName: string;
-}
-
-interface Generator {
-  generate: (config: Config) => GenerateReturn;
-}
-
-export const CliGenerator: Generator = {
+const Generator: Generator = {
   generate,
 };
+
+export default Generator;
