@@ -18,7 +18,11 @@ const generate = (config: Config) => {
 
     nx generate @nrwl/js:library --name=core-data --buildable &&
 
-    nx generate @nrwl/js:library --name=core-auth --buildable
+    nx generate @nrwl/js:library --name=core-auth --buildable &&
+
+    {{if observable}}
+      
+    {{endif}}
   `
 
   return {

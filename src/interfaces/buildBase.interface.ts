@@ -17,6 +17,8 @@ export interface NameVariations {
 
 export interface Config {
   name: string;
+  observable?: boolean;
+  firebase?: boolean;
   application: string;
   scope: string;
   type: string;
