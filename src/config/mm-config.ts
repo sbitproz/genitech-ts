@@ -30,6 +30,8 @@ const loginSchema: Schema = {
 export const config: Config = {
   name: 'mentor-mee',
   application: 'web-app',
+  observable: true,
+  firebase: true,
   scope: 'acme',
   type: 'react-express',
   packages: ['axios', '-D json-server', '-D concurrently', '@material-ui/core'],
@@ -38,6 +40,8 @@ export const config: Config = {
   entities: [
     mentorSchema,
     menteeSchema,    
+    // sprintsSchema,    
+    // achievablesSchema,    
   ],
   detached: {
     home: homeSchema,
