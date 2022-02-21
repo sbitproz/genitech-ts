@@ -1,7 +1,16 @@
+import * as fs from 'fs';
+import JSZip from "jszip";
 import { MODULE } from "../../config/module.constants";
 import { Config, Schema } from "../../interfaces/buildBase.interface";
 
+var zip = new JSZip();
+
 const slice = (config: Config, module: string) => {
+  zip.file('newFile.txt', 'test');
+  zip.generateAsync({type: 'blob'}).then((content) => {
+    fs.writeFileSync('./package.zip', Buffer.from(new Uint8Array(content)))
+    // fs.writeFileSync('test.wav', content)
+  });
     // do we have a state module, if yes generate a slice command for 
 }
 
