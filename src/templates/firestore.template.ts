@@ -37,7 +37,7 @@ const generate = (config: Config) => {
   return {
     template: translate(template,config),
     title: `Firebase Configuration`,
-    fileName: `libs/data/src/lib/conf/firebase.config.ts`,
+    fileName: `libs/core-data/src/lib/conf/firebase.config.ts`,
   };
 };
 

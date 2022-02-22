@@ -11,7 +11,7 @@ const generate = (config: Config) => {
 
     {{#if this.data}}
       {{#each entities}}
-        nx g slice {{this.refs}}Slice --project core-state &&
+    nx g slice {{this.refs}}Slice --project core-state &&
       {{/each}}
     {{/if}}
 
@@ -22,10 +22,10 @@ const generate = (config: Config) => {
     nx generate @nrwl/js:library --name=core-auth --buildable &&
 
     {{#if this.data}}
-      yarn add axios &&
+    yarn add axios &&
 
       {{#if this.observable}}
-        yarn add rxjs &&
+    yarn add rxjs &&
       {{/if}}  
     {{/if}}
 
@@ -36,7 +36,7 @@ const generate = (config: Config) => {
   return {
     template: translate(template,config),
     title: `CLI project builder`,
-    fileName: `na`,
+    fileName: `workspaceCliCommands.txt`,
   };
 };
 

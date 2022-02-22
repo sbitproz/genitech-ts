@@ -1,26 +1,24 @@
 import { Config } from "../interfaces/buildBase.interface";
-import { Generator } from "../interfaces/template.interface";
+import { GenerateReturn } from "../interfaces/template.interface";
 import { translate } from "../util/buildBase/buildBase";
 
-const generate = (config: Config) => {
+const generate = (config: Config, entity: string) => {
   const template = `
-    {{#if this.data}}
-      data
-    {{else if this.observable}}
-      observable
-    {{else}}
-      else observable
-    {{/if}}
-      else data
-    {{endif}}  
+    const {{model}}Slice = {
+      myslice: ''
+    }
   `
 
   return {
-    template: translate(template,config),
-    title: `Playground project builder`,
-    fileName: `na`,
+    template: translate(template, config, entity),
+    title: `Slice for ${entity}`,
+    fileName: `libs/core-state/src/lib/slices/${entity}Slice.ts`,
   };
 };
+
+export interface Generator {
+  generate: (config: Config, entity: string) => GenerateReturn;
+}
 
 const Generator: Generator = {
   generate,

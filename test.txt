@@ -1,5 +1,22 @@
 
-      observable
-      else data
-      
+    npx create-nx-workspace@latest --preset react --appName=web-app --style=styled-components --interactive=false --packageManager=yarn --nx-cloud=false mentor-mee &&
+      cd mentor-mee/ &&
+
+    nx generate @nrwl/js:library --name=core-state --buildable &&
+
+        nx g slice mentorsSlice --project core-state &&
+        nx g slice menteesSlice --project core-state &&
+
+    nx generate @nrwl/js:library --name=core-types --buildable &&
+
+    nx generate @nrwl/js:library --name=core-data --buildable &&
+
+    nx generate @nrwl/js:library --name=core-auth --buildable &&
+
+      yarn add axios &&
+
+        yarn add rxjs &&
+
+    yarn add @reduxjs/toolkit &&
+    yarn add react-redux
   

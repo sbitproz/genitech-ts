@@ -77,6 +77,6 @@ const addParams = (variations: NameVariations) => ({
 
 export const buildNameVariation = transformPipe(buildBase, addParams);
 
-export const prepareConfig = (config: Config) => ({...config, entities: {...config.entities.map(entity => buildNameVariation(entity))}});
+export const prepareConfig = (config: Config) => ({...config, entities: [...config.entities.map(entity => ({...entity, variations: buildNameVariation(entity)}))]});
 
-export const translate = (template: any, config: Config) => Handlebars.compile(template)(config);
+export const translate = (template: any, config: Config, other?: any) => Handlebars.compile(template)({...config, other});

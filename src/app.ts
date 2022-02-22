@@ -1,13 +1,13 @@
-import * as fs from 'fs';
+// import * as fs from 'fs';
 import { config, mentorSchema } from "./config/mm-config";
-import Generator from "./templates/play.template";
-import { buildNameVariation, prepareConfig } from "./util/buildBase/buildBase";
-import { commands } from './util/cli/buildProject';
+// import Generator from "./templates/cli.template";
+// import { buildNameVariation, prepareConfig } from "./util/buildBase/buildBase";
+import { commands } from './util/commands/buildProject';
 
-console.log('!!',buildNameVariation(mentorSchema))
+// console.log('!!', buildNameVariation(mentorSchema))
 
-const newConfig = prepareConfig(config);
+// const newConfig = prepareConfig(config);
 
-fs.writeFile('test.txt', Generator.generate(newConfig).template, () => {});
+// fs.writeFile('test.txt', Generator.generate(newConfig).template, () => { });
 
-commands.m
+commands(mentorSchema, config); 
