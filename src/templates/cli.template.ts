@@ -4,6 +4,8 @@ import { Generator } from "../interfaces/template.interface";
 
 const generate = (config: Config) => {
   const template = `
+    yarn config set "strict-ssl" false &&
+
     npx create-nx-workspace@latest --preset react --appName={{application}} --style=styled-components --interactive=false --packageManager=yarn --nx-cloud=false {{name}} &&
       cd {{name}}/ &&
 
@@ -11,7 +13,7 @@ const generate = (config: Config) => {
 
     {{#if this.data}}
       {{#each entities}}
-    nx g slice {{this.refs}}Slice --project core-state &&
+    nx g slice {{this.variations.refs}} --project core-state &&
       {{/each}}
     {{/if}}
 
@@ -29,8 +31,10 @@ const generate = (config: Config) => {
       {{/if}}  
     {{/if}}
 
-    yarn add @reduxjs/toolkit &&
-    yarn add react-redux
+    yarn add @reduxjs\/toolkit &&
+    yarn add react-redux &&
+
+    yarn config set "strict-ssl" true
   `
 
   return {
