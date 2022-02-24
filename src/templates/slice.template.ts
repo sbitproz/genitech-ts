@@ -26,14 +26,14 @@ export interface {{model}}SliceState extends EntityState<{{model}}SliceEntity> {
 
 export const {{ref}}SliceAdapter = createEntityAdapter<{{model}}SliceEntity>();
 
-export const initialSliceState: {{model}}SliceState = {{ref}}SliceAdapter.getInitialState({
+export const initialState: {{model}}SliceState = {{ref}}SliceAdapter.getInitialState({
   loadingStatus: 'not loaded',
   error: undefined,
 });
   
 export const {{ref}}Slice = createSlice({
   name: {{constants}}_SLICE_FEATURE_KEY,
-  initialState: initialSliceState,
+  initialState: initialState,
   reducers: {
     add: {{ref}}SliceAdapter.addOne,
     remove: {{ref}}SliceAdapter.removeOne,
