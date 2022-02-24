@@ -1,13 +1,13 @@
-import { Config, Schema } from "../../interfaces/buildBase.interface";
+import { Config, Schema } from "@interfaces/buildBase.interface";
 import { prepareConfig } from "../buildBase/buildBase";
-import { slice } from './buildRedux';
-import { workspace } from "./buildWorkspace";
-import { getZip, zipPackageElement } from "./packageUtil";
+import { reduxStore, selectors, slice } from './redux.helpers';
+import { workspace } from "./workspace.helpers";
+import { getZip, zipPackageElement } from "./package.helpers";
+import { dataCore, dataEntity } from "./data.helpers";
 
 export const commands = (schema: Schema, sourceConfig: Config) => {
   const zip = getZip();
   const config = prepareConfig(sourceConfig);
-  console.log('config', config.entities);
 
   return [
     { func: workspace, params: { config } },
@@ -15,6 +15,11 @@ export const commands = (schema: Schema, sourceConfig: Config) => {
     // { func: dependencies, params: { config } },
     // { func: libs, params: { config, suffix: suffixes.lib } },
     { func: slice, params: { config } },
+    { func: reduxStore, params: { config } },
+    { func: selectors, params: { config } },
+    { func: dataCore, params: { config } },
+    { func: dataEntity, params: { config } },
+    // { func: (config: Config) => , params: { config } },
     // { func: componentLayer, params: { config, suffix: suffixes.component } },
     // {
     //   func: containerComponent,

@@ -1,4 +1,4 @@
-import { Config } from "./buildBase.interface";
+import { Config, Schema } from "./buildBase.interface";
 
 export interface GenerateReturn {
   template: string;
@@ -8,4 +8,8 @@ export interface GenerateReturn {
 
 export interface Generator {
   generate: (config: Config) => GenerateReturn;
+}
+
+export interface GeneratorEntity {
+  generate: (config: Config, entity: Schema) => GenerateReturn;
 }

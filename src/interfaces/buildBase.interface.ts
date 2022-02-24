@@ -13,6 +13,8 @@ export interface NameVariations {
   selectors: string;
   modelParam?: string;
   modelParams?: string;
+  constant?: string;
+  constants?: string;
 }
 
 export interface Config {
@@ -23,6 +25,7 @@ export interface Config {
   application: string;
   scope: string;
   type: string;
+  baseEndpoint: string;
   packages?: string[];
   dependencies?: string[];
   libs?: string[];

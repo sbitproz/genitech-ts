@@ -1,13 +1,18 @@
 import { Config, Schema } from "../interfaces/buildBase.interface";
 import { MODULE } from "./module.constants";
 
+const sprintSchema: Schema = {
+  model: "sprint",
+  modelPlural: "sprints",
+};
+
 export const mentorSchema: Schema = {
   model: "mentor",
   modelPlural: "mentors",
 };
 
 export const menteeSchema: Schema = {
-  model: "mentor",
+  model: "mentee",
   modelPlural: "mentees",
 };
 
@@ -28,6 +33,7 @@ export const config: Config = {
   observable: true,
   firebase: true,
   scope: "acme",
+  baseEndpoint: 'mentor-mee',
   type: "react-express",
   packages: ["axios", "-D json-server", "-D concurrently", "@material-ui/core"],
   dependencies: [],
@@ -41,7 +47,7 @@ export const config: Config = {
   entities: [
     mentorSchema,
     menteeSchema,
-    // sprintsSchema,
+    sprintSchema,
     // achievablesSchema,
   ],
   detached: {

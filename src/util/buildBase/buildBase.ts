@@ -66,6 +66,8 @@ const buildBase = (schema: Schema): NameVariations => ({
   models: pascalCase(schema.modelPlural),
   selector: `select${pascalCase(schema.model)}`,
   selectors: `select${pascalCase(schema.modelPlural)}`,
+  constant: `${constantCase(schema.model)}`,
+  constants: `${constantCase(schema.modelPlural)}`,
 });
 
 
