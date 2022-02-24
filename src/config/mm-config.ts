@@ -6,9 +6,34 @@ const sprintSchema: Schema = {
   modelPlural: "sprints",
 };
 
+export const userSchema: Schema = {
+  model: "user",
+  modelPlural: "users",
+  fields: [{
+    name: 'id',
+    type: 'uid'
+  },{
+    name: 'name',
+    type: 'string'
+  }]
+}
+
 export const mentorSchema: Schema = {
   model: "mentor",
   modelPlural: "mentors",
+  fields: [{
+    name: 'userId',
+    type: 'uid'
+  },{
+    name: 'slug',
+    type: 'string'
+  },{
+    name: 'profileIntro',
+    type: 'string'
+  },{
+    name: 'profileDescription',
+    type: 'string'
+  }]
 };
 
 export const menteeSchema: Schema = {
@@ -45,6 +70,7 @@ export const config: Config = {
     MODULE.LOGIN,
   ],
   entities: [
+    userSchema,
     mentorSchema,
     menteeSchema,
     sprintSchema,
