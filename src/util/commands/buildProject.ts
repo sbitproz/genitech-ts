@@ -4,7 +4,6 @@ import { reduxGenerators } from './redux.helpers';
 import { workspaceGenerators } from "./workspace.helpers";
 import { getZip, zipPackageElement } from "./package.helpers";
 import { dataGenerators } from "./data.helpers";
-import { generatorCore, generatorEntity } from "@util/buildBase/generatorRunner";
 
 export const commands = (schema: Schema, sourceConfig: Config) => {
   const zip = getZip();

@@ -1,7 +1,15 @@
+type FieldTypes = 'uid' | 'string' | 'number' | 'boolean';
+
+type Field = {
+  name: string;
+  type: FieldTypes;
+}
+
 export interface Schema {
   model: string;
   modelPlural: string;
   variations?: NameVariations;
+  fields?: Field[]
 }
 
 export interface NameVariations {
