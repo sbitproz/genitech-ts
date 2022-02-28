@@ -1,8 +1,9 @@
 import { Config } from "@interfaces/buildBase.interface";
 import GeneratorEntity from "@templates/dataEntity.template";
 import GeneratorCore from "@templates/dataCore.templates";
+import { generatorCore, generatorEntity } from "@util/buildBase/generatorRunner";
 
-export const dataEntity = (config: Config) => config.entities.map((entity) => GeneratorEntity.generate(config, entity));
-
-export const dataCore = (config: Config) => GeneratorCore.generate(config);
-
+export const dataGenerators = (config: Config) => [
+    { func: generatorCore(GeneratorCore), params: { config }},
+    { func: generatorEntity(GeneratorEntity), params: { config }},
+]

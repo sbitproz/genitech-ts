@@ -1,34 +1,19 @@
 import { Config, Schema } from "@interfaces/buildBase.interface";
 import { prepareConfig } from "../buildBase/buildBase";
-import { reduxStore, selectors, slice } from './redux.helpers';
-import { workspace } from "./workspace.helpers";
+import { reduxGenerators } from './redux.helpers';
+import { workspaceGenerators } from "./workspace.helpers";
 import { getZip, zipPackageElement } from "./package.helpers";
-import { dataCore, dataEntity } from "./data.helpers";
+import { dataGenerators } from "./data.helpers";
+import { generatorCore, generatorEntity } from "@util/buildBase/generatorRunner";
 
 export const commands = (schema: Schema, sourceConfig: Config) => {
   const zip = getZip();
   const config = prepareConfig(sourceConfig);
 
   return [
-    { func: workspace, params: { config } },
-    // { func: packages, params: { config } },
-    // { func: dependencies, params: { config } },
-    // { func: libs, params: { config, suffix: suffixes.lib } },
-    { func: slice, params: { config } },
-    { func: reduxStore, params: { config } },
-    { func: selectors, params: { config } },
-    { func: dataCore, params: { config } },
-    { func: dataEntity, params: { config } },
-    // { func: (config: Config) => , params: { config } },
-    // { func: componentLayer, params: { config, suffix: suffixes.component } },
-    // {
-    //   func: containerComponent,
-    //   params: {
-    //     entity: config.detached?.home,
-    //     suffix: suffixes.component,
-    //   },
-    // },
-    // { func: jsonServer, params: {} },
+    ...reduxGenerators(config),
+    ...workspaceGenerators(config),
+    ...dataGenerators(config),
   ].reduce(
     (acc, command) => {
       const result = command.func(command.params.config)

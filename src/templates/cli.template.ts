@@ -23,6 +23,10 @@ const generate = (config: Config) => {
 
     nx generate @nrwl/js:library --name=core-auth --buildable &&
 
+    yarn add -D json-server && concurrently && @types/node &&
+    
+    yarn add @mui/material @mui/styled-engine-sc styled-components @mui/icons-material &&
+
     {{#if this.data}}
     yarn add axios &&
 

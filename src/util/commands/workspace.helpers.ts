@@ -1,4 +1,7 @@
 import { Config } from "@interfaces/buildBase.interface";
 import Generator from "@templates/cli.template";
+import { generatorCore } from "@util/buildBase/generatorRunner";
 
-export const workspace = (config: Config) => Generator.generate(config)
+export const workspaceGenerators = (config: Config) => [
+    { func: generatorCore(Generator), params: { config }},
+]

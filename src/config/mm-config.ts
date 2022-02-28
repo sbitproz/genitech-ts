@@ -1,6 +1,8 @@
 import { Config, Schema } from "../interfaces/buildBase.interface";
 import { MODULE } from "./module.constants";
 
+const events = ['enrol', 'leave'];
+
 const sprintSchema: Schema = {
   model: "sprint",
   modelPlural: "sprints",
@@ -33,9 +35,9 @@ export const config: Config = {
   observable: true,
   firebase: true,
   scope: "acme",
+  events,
   baseEndpoint: 'mentor-mee',
   type: "react-express",
-  packages: ["axios", "-D json-server", "-D concurrently", "@material-ui/core"],
   dependencies: [],
   libs: [
     MODULE.DATA,

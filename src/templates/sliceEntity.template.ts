@@ -20,6 +20,7 @@ export interface {{model}}SliceEntity {
 }
 
 export interface {{model}}SliceState extends EntityState<{{model}}SliceEntity> {
+  selectedId?: string | number; // which {{models}} record has been selected
   loadingStatus: 'not loaded' | 'loading' | 'loaded' | 'error';
   error?: string;
 }
