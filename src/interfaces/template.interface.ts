@@ -10,6 +10,6 @@ export interface Generator {
   generate: (config: Config) => GenerateReturn;
 }
 
-export interface GeneratorEntity {
-  generate: (config: Config, entity: Schema) => GenerateReturn;
+export interface GeneratorEntity<T = GenerateReturn> {
+  generate: (config: Config, entity: Schema) => T;
 }
