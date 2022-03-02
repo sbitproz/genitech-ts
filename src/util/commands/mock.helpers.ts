@@ -1,39 +1,47 @@
 import { MODULE } from "@config/module.constants";
-import { Config, Schema } from "@interfaces/buildBase.interface";
-import {
-  GenerateReturn,
-  GeneratorEntity,
-} from "@interfaces/template.interface";
+import { Config, FieldTypes, Schema } from "@interfaces/buildBase.interface";
+import { GeneratorEntity } from "@interfaces/template.interface";
+import { faker } from '@faker-js/faker';
+
+const UNSET = '"unset"';
 
 const addSeparator =
   (separator: string, blank: string) => (predicate: boolean) =>
     predicate ? "" : separator;
 
+const generateFieldValue = (type: FieldTypes) => ({
+  uuid: `"${faker.datatype.uuid()}"`,
+   forename: `"${faker.name.firstName()}"`,
+   lastname: `"${faker.name.lastName()}"`,
+   title: `"${faker.name.title()}"`,
+   fullname: `"${faker.name.title()} ${faker.name.lastName()}"`,
+   lorem: `"${faker.lorem.sentence()}"`
+})[type];
+
 const addCommaSeparator = addSeparator(",", "");
+
+const filterEntityWithFields = (entity: Schema) => entity.fields?.length;
+
+const createEntityArrayOfRecords = (Generator: GeneratorEntity, config: Config) => 
+  (entity: Schema) => `"${entity.variations.ref}": [${Generator.generate(config, entity)}]`;
 
 export const mockGeneratorEntity =
   (Generator: GeneratorEntity) => (config: Config) => ({
     title: "Mock Data",
-    fileName: `${MODULE.MOCK}/${config.name}mock.json`,
+    fileName: `${MODULE.MOCK}/${config.name}-mock.json`,
     template: `{ ${config.entities
-      .map(
-        (entity) =>
-          `"${entity.variations.ref}": [${Generator.generate(config, entity)}]`
-      )
-      .join(",")}}
-    }`,
+      .filter(filterEntityWithFields)
+      .map(createEntityArrayOfRecords(Generator, config))
+      .join(",")}}`,
   });
 
 const MockGenerator = {
   generate: (_, entity: Schema) =>
-    Array(10)
-      .fill("")
+    Array(30).fill("")
       .map(() => {
-        return (entity.fields || []).reduce(
-          (acc, { name, type }, idx) =>
-            `${acc} ${addCommaSeparator(idx === 0)} "${name}": "test"`,
-          ``
-        );
+        return `{${(entity.fields || []).map(
+          ({ name, type }, idx) => `"${name}": ${generateFieldValue(type) || UNSET}`
+        ).join(',')}}`;
       }),
 };
 

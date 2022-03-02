@@ -11,9 +11,9 @@ export const commands = (schema: Schema, sourceConfig: Config) => {
   const config = prepareConfig(sourceConfig);
 
   return [
-    // ...reduxGenerators(config),
-    // ...workspaceGenerators(config),
-    // ...dataGenerators(config),
+    ...reduxGenerators(config),
+    ...workspaceGenerators(config),
+    ...dataGenerators(config),
     ...mockGenerators(config),
   ].reduce(
     (acc, command) => {

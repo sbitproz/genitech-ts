@@ -13,10 +13,10 @@ export const userSchema: Schema = {
   modelPlural: "users",
   fields: [{
     name: 'id',
-    type: 'uid'
+    type: 'uuid'
   },{
     name: 'name',
-    type: 'string'
+    type: 'fullname'
   }]
 }
 
@@ -25,16 +25,16 @@ export const mentorSchema: Schema = {
   modelPlural: "mentors",
   fields: [{
     name: 'userId',
-    type: 'uid'
+    type: 'uuid'
   },{
     name: 'slug',
-    type: 'string'
+    type: 'lorem'
   },{
     name: 'profileIntro',
-    type: 'string'
+    type: 'lorem'
   },{
     name: 'profileDescription',
-    type: 'string'
+    type: 'lorem'
   }]
 };
 
