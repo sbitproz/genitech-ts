@@ -6,23 +6,24 @@ import { faker } from '@faker-js/faker';
 const UNSET = '"unset"';
 
 const addSeparator =
-  (separator: string, blank: string) => (predicate: boolean) =>
+  (separator: string, blank: string) => (predicate: boolean) => 
     predicate ? "" : separator;
 
 const generateFieldValue = (type: FieldTypes) => ({
   uuid: `"${faker.datatype.uuid()}"`,
-   forename: `"${faker.name.firstName()}"`,
-   lastname: `"${faker.name.lastName()}"`,
-   title: `"${faker.name.title()}"`,
-   fullname: `"${faker.name.title()} ${faker.name.lastName()}"`,
-   lorem: `"${faker.lorem.sentence()}"`
+  forename: `"${faker.name.firstName()}"`,
+  lastname: `"${faker.name.lastName()}"`,
+  title: `"${faker.name.title()}"`,
+  email: `"${faker.internet.email()}"`,
+  fullname: `"${faker.name.firstName()} ${faker.name.lastName()}"`,
+  lorem: `"${faker.lorem.sentence()}"`
 })[type];
 
 const addCommaSeparator = addSeparator(",", "");
 
 const filterEntityWithFields = (entity: Schema) => entity.fields?.length;
 
-const createEntityArrayOfRecords = (Generator: GeneratorEntity, config: Config) => 
+const createEntityArrayOfRecords = (Generator: GeneratorEntity, config: Config) =>
   (entity: Schema) => `"${entity.variations.ref}": [${Generator.generate(config, entity)}]`;
 
 export const mockGeneratorEntity =

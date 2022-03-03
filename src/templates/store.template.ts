@@ -2,7 +2,7 @@ import { MODULE } from "@config/module.constants";
 import { Config } from "@interfaces/buildBase.interface";
 import { Generator } from "@interfaces/template.interface";
 import { translate } from "@util/buildBase/buildBase";
-import { moduleLocation } from "@util/commands/package.helpers";
+import { moduleLibLocation } from "@util/commands/package.helpers";
 
 const generate = (config: Config) => {
   const template = `
@@ -82,7 +82,7 @@ export function ofType<
   return {
     template: translate(template, config),
     title: `Store for app`,
-    fileName: `${moduleLocation(MODULE.STATE)}store.ts`,
+    fileName: `${moduleLibLocation(MODULE.STATE)}store.ts`,
   };
 };
 

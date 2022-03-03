@@ -2,7 +2,7 @@ import { MODULE } from "@config/module.constants";
 import { Config, Schema } from "@interfaces/buildBase.interface";
 import { GeneratorEntity } from "@interfaces/template.interface";
 import { translate } from "@util/buildBase/buildBase";
-import { moduleLocation } from "@util/commands/package.helpers";
+import { moduleLibLocation } from "@util/commands/package.helpers";
 
 const generate = (config: Config, entity: Schema) => {
   const template = `
@@ -27,7 +27,7 @@ export interface {{model}}SliceState extends EntityState<{{model}}SliceEntity> {
 
 export const {{ref}}SliceAdapter = createEntityAdapter<{{model}}SliceEntity>();
 
-export const initialState: {{model}}SliceState = {{ref}}SliceAdapter.getInitialState({
+const initialState: {{model}}SliceState = {{ref}}SliceAdapter.getInitialState({
   loadingStatus: 'not loaded',
   error: undefined,
 });
@@ -46,7 +46,7 @@ export default {{ref}}Slice.reducer
   return {
     template: translate(template, config, entity),
     title: `Slice for ${entity.variations.refs}`,
-    fileName: `${moduleLocation(MODULE.STATE)}${entity.variations.refs}.slice.ts`,
+    fileName: `${moduleLibLocation(MODULE.STATE)}${entity.variations.ref}.slice.ts`,
   };
 };
 

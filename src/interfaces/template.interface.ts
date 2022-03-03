@@ -7,7 +7,7 @@ export interface GenerateReturn {
 }
 
 export interface Generator {
-  generate: (config: Config) => GenerateReturn;
+  generate: (config: Config, ...otherParameters: any) => GenerateReturn;
 }
 
 export interface GeneratorEntity<T = GenerateReturn> {

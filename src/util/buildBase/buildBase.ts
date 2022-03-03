@@ -81,13 +81,12 @@ export const buildNameVariation = transformPipe(buildBase, addParams);
 
 export const prepareConfig = (config: Config) => ({ ...config, entities: [...config.entities.map(entity => ({ ...entity, variations: buildNameVariation(entity) }))] });
 
-export const translate = (template: any, config: Config, other?: any) => {
-  return Handlebars.compile(template)({ ...config, ...flatten(other) })
-};
+export const translate = (template: any, config: Config, other?: any) =>  Handlebars.compile(template)({ ...config, ...flatten(other) })
 
 export const flatten = (object = {}) => { 
   return Object.keys(object).reduce((acc, key) => {
-  if (typeof object[key] === 'object' ) {
+
+  if (typeof object[key] === 'object' && !Array.isArray(object[key]) ) {
     return {...acc, ...flatten(object[key])}
   }
 

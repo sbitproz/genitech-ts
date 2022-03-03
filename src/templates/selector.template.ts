@@ -2,7 +2,7 @@ import { MODULE } from "../config/module.constants";
 import { Config, Schema } from "../interfaces/buildBase.interface";
 import { GeneratorEntity } from "../interfaces/template.interface";
 import { translate } from "../util/buildBase/buildBase";
-import { moduleLocation } from "../util/commands/package.helpers";
+import { moduleLibLocation } from "../util/commands/package.helpers";
 
 const generate = (config: Config, entity: Schema) => {
   const template = `
@@ -30,7 +30,7 @@ export default {{ref}}Slice.reducer
   return {
     template: translate(template, config, entity),
     title: `Slice for ${entity.variations.refs}`,
-    fileName: `${moduleLocation(MODULE.STATE)}${entity.variations.refs}.selectors.ts`,
+    fileName: `${moduleLibLocation(MODULE.STATE)}${entity.variations.ref}.selectors.ts`,
   };
 };
 

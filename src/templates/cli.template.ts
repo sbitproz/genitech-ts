@@ -11,7 +11,7 @@ const generate = (config: Config) => {
 
     yarn add -D json-server concurrently @types/node &&
 
-    jq '.scripts["mock-server"] = "json-server --watch ./mock/{{name}}-mock.json"' package.json > package-temp.json &&
+    jq '.scripts["mock-server"] = "json-server --port 3004 --watch ./mock/{{name}}-mock.json"' package.json > package-temp.json &&
 
     mv package-temp.json package.json &&
 

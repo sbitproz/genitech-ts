@@ -11,4 +11,6 @@ export const zipPackageElement = (config, zip) => (element: GenerateReturn) => {
     });
 }
 
-export const moduleLocation = (moduleName: string) => `libs/${moduleName}/src/lib/`;
+export const moduleLibLocation = (moduleName: string) => `${moduleRootLocation(moduleName)}lib/`;
+
+export const moduleRootLocation = (moduleName: string) => `libs/${moduleName}/src/`;

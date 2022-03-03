@@ -1,6 +1,6 @@
 import { Config } from "../interfaces/buildBase.interface";
 import { translate } from "../util/buildBase/buildBase";
-import { moduleLocation } from "../util/commands/package.helpers";
+import { moduleLibLocation } from "../util/commands/package.helpers";
 import { MODULE } from "../config/module.constants";
 import { Generator } from "../interfaces/template.interface";
 
@@ -8,14 +8,17 @@ const generate = (config: Config) => {
   const template = `
 import axios from 'axios';
 
-export const baseURL = "${config.baseEndpoint}";
+const BASE_URL = {
+  dev: "http://localhost:3004/",
+  prod: "${config.baseEndpoint}",
+}
 
-interface BaseEntity {
+export interface BaseEntity {
   id: string;
 }
 
 const api = axios.create({
-  baseURL,
+  baseURL: BASE_URL.dev,
   timeout: 1000,
   headers: {'X-Custom-Header': 'foobar'}
 });
@@ -30,19 +33,19 @@ const update = (getUrlWithId: Function) => (entity: BaseEntity) => api.patch(\`\
 
 const remove = (getUrlWithId: Function) => (id: string) => api.delete(\`\${getUrlWithId(id)}\`)
 
-export const baseAPI = (getUrl: Function, getUrlWithId: Function) => {
-  load(getUrl),
-  find(getUrlWithId),
-  create(getUrl),
-  update(getUrlWithId),
-  remove(getUrlWithId)
-} 
+export const baseAPI = (getUrl: Function, getUrlWithId: Function) => ({
+  load: load(getUrl),
+  find: find(getUrlWithId),
+  create: create(getUrl),
+  update: update(getUrlWithId),
+  remove: remove(getUrlWithId)
+}) 
   `
 
   return {
     template: translate(template,config),
     title: `Data config template`,
-    fileName: `${moduleLocation(MODULE.DATA)}data.conf.ts`,
+    fileName: `${moduleLibLocation(MODULE.DATA)}data.conf.ts`,
   };
 };
 

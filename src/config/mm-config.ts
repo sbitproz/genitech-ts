@@ -17,6 +17,12 @@ export const userSchema: Schema = {
   },{
     name: 'name',
     type: 'fullname'
+  },{
+    name: 'email',
+    type: 'email'
+  },{
+    name: 'slug',
+    type: 'lorem'
   }]
 }
 
@@ -29,6 +35,12 @@ export const mentorSchema: Schema = {
   },{
     name: 'slug',
     type: 'lorem'
+  },{
+    name: 'name',
+    type: 'fullname'
+  },{
+    name: 'email',
+    type: 'email'
   },{
     name: 'profileIntro',
     type: 'lorem'
