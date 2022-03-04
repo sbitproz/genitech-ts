@@ -2,6 +2,8 @@ import { Config } from "../interfaces/buildBase.interface";
 import { translate } from "../util/buildBase/buildBase";
 import { Generator } from "../interfaces/template.interface";
 
+const generateTsLibrary = (name: string) => `nx generate @nrwl/workspace:library --name=${name} --buildable &&`
+
 const generate = (config: Config) => {
   const template = `
     yarn config set "strict-ssl" false &&
@@ -15,7 +17,7 @@ const generate = (config: Config) => {
 
     mv package-temp.json package.json &&
 
-    nx generate @nrwl/js:library --name=core-state --buildable &&
+    ${generateTsLibrary('core-state')}
 
     {{#if this.data}}
       {{#each entities}}
@@ -23,12 +25,10 @@ const generate = (config: Config) => {
       {{/each}}
     {{/if}}
 
-    nx generate @nrwl/js:library --name=core-types --buildable &&
-
-    nx generate @nrwl/js:library --name=core-data --buildable &&
-
-    nx generate @nrwl/js:library --name=core-auth --buildable &&
-
+    ${generateTsLibrary('core-types')}
+    ${generateTsLibrary('core-data')}
+    ${generateTsLibrary('core-auth')}
+    
     yarn add @mui/material @mui/styled-engine-sc styled-components @mui/icons-material &&
 
     {{#if this.data}}
