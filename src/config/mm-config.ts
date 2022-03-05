@@ -36,6 +36,9 @@ export const mentorSchema: Schema = {
     name: 'slug',
     type: 'lorem'
   },{
+    name: 'password',
+    type: 'password'
+  },{
     name: 'name',
     type: 'fullname'
   },{
@@ -53,6 +56,28 @@ export const mentorSchema: Schema = {
 export const menteeSchema: Schema = {
   model: "mentee",
   modelPlural: "mentees",
+  fields: [{
+    name: 'userId',
+    type: 'uuid'
+  },{
+    name: 'slug',
+    type: 'lorem'
+  },{
+    name: 'password',
+    type: 'password'
+  },{
+    name: 'name',
+    type: 'fullname'
+  },{
+    name: 'email',
+    type: 'email'
+  },{
+    name: 'profileIntro',
+    type: 'lorem'
+  },{
+    name: 'profileDescription',
+    type: 'lorem'
+  }]
 };
 
 const homeSchema: Schema = {

@@ -1,4 +1,4 @@
-import { Config, Schema } from "@interfaces/buildBase.interface";
+import { Config } from "@interfaces/buildBase.interface";
 import GeneratorEntity from "@templates/dataEntity.template";
 import GeneratorLibrary from "@templates/libraryExport.templates";
 import GeneratorCore from "@templates/dataCore.templates";

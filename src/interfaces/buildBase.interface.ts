@@ -1,4 +1,4 @@
-export type FieldTypes = 'uuid' | 'string'| 'lorem' | 'number' | 'boolean' | 'forename' | 'lastname' | 'fullname' | 'email';
+export type FieldTypes = 'uuid' | 'string'| 'lorem' | 'number' | 'boolean' | 'forename' | 'lastname' | 'fullname' | 'email' | 'password';
 
 type Field = {
   name: string;

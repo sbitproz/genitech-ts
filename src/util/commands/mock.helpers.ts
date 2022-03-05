@@ -24,7 +24,7 @@ const addCommaSeparator = addSeparator(",", "");
 const filterEntityWithFields = (entity: Schema) => entity.fields?.length;
 
 const createEntityArrayOfRecords = (Generator: GeneratorEntity, config: Config) =>
-  (entity: Schema) => `"${entity.variations.ref}": [${Generator.generate(config, entity)}]`;
+  (entity: Schema) => `"${entity.variations.refs}": [${Generator.generate(config, entity)}]`;
 
 export const mockGeneratorEntity =
   (Generator: GeneratorEntity) => (config: Config) => ({

@@ -5,6 +5,7 @@ import { workspaceGenerators } from "./workspace.helpers";
 import { getZip, zipPackageElement } from "./package.helpers";
 import { dataGenerators } from "./data.helpers";
 import { mockGenerators } from "./mock.helpers";
+import { typeGenerators } from "./type.helpers";
 
 export const commands = (schema: Schema, sourceConfig: Config) => {
   const zip = getZip();
@@ -15,6 +16,8 @@ export const commands = (schema: Schema, sourceConfig: Config) => {
     ...workspaceGenerators(config),
     ...dataGenerators(config),
     ...mockGenerators(config),
+    ...mockGenerators(config),
+    ...typeGenerators(config),
   ].reduce(
     (acc, command) => {
       const result = command.func(command.params.config)

@@ -6,25 +6,20 @@ import { GeneratorEntity } from "@interfaces/template.interface";
 
 const generate = (config: Config, entity: Schema) => {
   const template = `
-import { baseAPI } from './data.conf';
-import { {{model}} } from '@{{name}}/${MODULE.INTERFACE}';
+export interface {{model}} {
 
-const getUrl = () => \`{{refs}}/\`;
-
-const getUrlWithId = (id: string) => \`{{refs}}/\${id}\`;
-
-export const {{refs}}API = baseAPI<{{model}}>(getUrl, getUrlWithId);
+}
   `
 
   return {
     template: translate(template,config, entity),
-    title: `Data entity template`,
-    fileName: `${moduleLibLocation(MODULE.DATA)}${entity.variations.ref}.service.ts`,
+    title: `Interface template`,
+    fileName: `${moduleLibLocation(MODULE.INTERFACE)}${entity.variations.ref}.interfaces.ts`,
   };
 };
 
-const DataGenerator: GeneratorEntity = {
+const InterfaceGenerator: GeneratorEntity = {
   generate,
 };
 
-export default DataGenerator;
+export default InterfaceGenerator;

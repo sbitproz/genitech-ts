@@ -1,5 +1,5 @@
 export const MODULE = {
-  INTERFACE: "core-interfaces",
+  INTERFACE: "core-types",
   DATA: "core-data",
   MOCK: "mock",
   STATE: "core-state",
