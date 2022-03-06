@@ -10,7 +10,7 @@ const generate = (config: Config, entity: Schema) => {
   const template = `
 
 import { of, switchMap } from "rxjs";
-import { ofType } from "./store";
+import { ofType } from "redux-observable";
 import { list{{models}}, fetch{{model}}, update{{model}}, remove{{model}}, add{{model}} } from "./{{ref}}.slice";
 
 // {{model}} Epic
@@ -21,7 +21,10 @@ export const {{ref}}Epic$ = (actions$: any) => actions$.pipe(
     return of([])
   })
 );
-  
+
+export default [
+  {{ref}}Epic$
+]  
   `
 
   return {
