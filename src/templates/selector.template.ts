@@ -8,7 +8,7 @@ const generate = (config: Config, entity: Schema) => {
   const template = `
 import { createSelector } from '@reduxjs/toolkit';
 import { RootState } from './store';
-import { {{ref}}SliceAdapter, {{ref}}Slice, {{model}}SliceState, {{constants}}_SLICE_FEATURE_KEY } from './{{refs}}.slice';
+import { {{ref}}SliceAdapter, {{ref}}Slice, {{model}}SliceState, {{constants}}_SLICE_FEATURE_KEY } from './{{ref}}.slice';
 
 const { selectAll, selectEntities } = {{ref}}SliceAdapter.getSelectors();
 

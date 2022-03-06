@@ -1,9 +1,30 @@
-export type FieldTypes = 'uuid' | 'string'| 'lorem' | 'number' | 'boolean' | 'forename' | 'lastname' | 'fullname' | 'email' | 'password';
+export enum TypeOptions {
+  uuid = 'uuid',
+  string = 'string',
+  lorem = 'lorem',
+  number = 'number',
+  boolean = 'boolean',
+  forename = 'forename',
+  lastname = 'lastname',
+  fullname = 'fullname',
+  email = 'email',
+  password = 'password',
+}
+
+export type FieldTypes = `${TypeOptions}`;
 
 type Field = {
   name: string;
   type: FieldTypes;
 }
+
+export const StringTypes: string[] = [TypeOptions.email, TypeOptions.uuid, 
+  TypeOptions.lorem, TypeOptions.password, TypeOptions.fullname, 
+  TypeOptions.forename, TypeOptions.lastname, TypeOptions.string];
+
+export const NumberTypes: string[] = [TypeOptions.number];
+
+export const BooleanTypes: string[] = [TypeOptions.boolean];
 
 export interface Schema {
   model: string;

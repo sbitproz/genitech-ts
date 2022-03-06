@@ -11,7 +11,7 @@ const generate = (config: Config) => {
     npx create-nx-workspace@latest --preset react --appName={{application}} --style=styled-components --interactive=false --packageManager=yarn --nx-cloud=false {{name}} &&
       cd {{name}}/ &&
 
-    yarn add -D json-server concurrently @types/node &&
+    yarn add -D json-server concurrently @types/node && 
 
     jq '.scripts["mock-server"] = "json-server --port 3004 --watch ./mock/{{name}}-mock.json"' package.json > package-temp.json &&
 
@@ -21,7 +21,7 @@ const generate = (config: Config) => {
 
     {{#if this.data}}
       {{#each entities}}
-    nx g slice {{this.variations.refs}} --project core-state &&
+    nx g slice {{this.variations.ref}} --project core-state &&
       {{/each}}
     {{/if}}
 

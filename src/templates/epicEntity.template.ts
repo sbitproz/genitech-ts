@@ -8,17 +8,20 @@ import { GeneratorEntity } from "@interfaces/template.interface";
 
 const generate = (config: Config, entity: Schema) => {
   const template = `
+
+import { of, switchMap } from "rxjs";
+import { ofType } from "./store";
+import { list{{models}}, fetch{{model}}, update{{model}}, remove{{model}}, add{{model}} } from "./{{ref}}.slice";
+
 // {{model}} Epic
-export const {{ref}}Epic = 'epic';
-// export const {{ref}}Epic$ = actions\$ => actions\$.pipe(
-//   ofType({{models}}Actions.label{{model}}), // Trigger Event
-//   pessimisticUpdate({
-//     run: (action) => this.{{refs}}Service.label(action.{{ref}}).pipe(
-//       map(({{singleParam}}) => {{models}}Actions.label{{model}}Success({ {{ref}} })) // Completion Event
-//     ),
-//     onError: (action, error) => {{models}}Actions.{label}{{model}}Failure({ error }) // Completion Event
-//   })
-// );
+export const {{ref}}Epic$ = (actions$: any) => actions$.pipe(
+  ofType(list{{models}}),
+  switchMap(() => {
+    console.log('requesting')
+    return of([])
+  })
+);
+  
   `
 
   return {

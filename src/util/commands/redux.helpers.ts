@@ -12,7 +12,7 @@ const extensions = ['slice', 'selectors', 'epics']
 const reduxEntityFiles = (config: Config) => config.entities.reduce((files, entity) => {
     const { ref } = entity.variations;
     return [...files, ...extensions.map(ext => `${ref}.${ext}`) ]
-}, [])
+}, ['store'])
 
 export const reduxGenerators = (config: Config) => [
     { func: generatorCore(GeneratorCore), params: { config }},

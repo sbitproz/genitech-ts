@@ -10,10 +10,9 @@ import { configureStore } from '@reduxjs/toolkit'
 import { Action } from 'redux';
 import { OperatorFunction } from 'rxjs';
 import { filter } from 'rxjs/operators';
-
-
+import rootEpic from 
 {{#each entities}}
-import {{this.variations.refs}}Reducer from './{{this.variations.refs}}.slice';
+import {{this.variations.refs}}Reducer from './{{this.variations.ref}}.slice';
 {{/each}}
 
 export const store = configureStore({
@@ -32,6 +31,39 @@ export type RootState = ReturnType<typeof store.getState>
 export type AppDispatch = typeof store.dispatch
 
 // --------------------------------------------------------
+
+
+function createEpicMiddleware() {
+  const epic$ = new Subject();
+  const epicMiddleware = (store: any) => {
+    const actionSubject$ = new Subject();
+    const stateSubject$ = new Subject();
+    const action$ = actionSubject$.asObservable();
+    const state$ = stateSubject$.asObservable();
+
+    epic$
+      .pipe(mergeMap((epic: any) => epic(action$, state$)))
+      .subscribe(store.dispatch);
+
+    return (next: any) => {
+      return (action: any) => {
+        const result = next(action);
+
+        stateSubject$.next(store.getState());
+        actionSubject$.next(action);
+
+        return result;
+      };
+    };
+  };
+
+  epicMiddleware.run = (rootEpic: any) => epic$.next(rootEpic);
+}
+
+const epicMiddleware = createEpicMiddleware();
+
+(epicMiddleware as any).run(rootEpic);
+
 
 const keyHasType = (type: unknown, key: unknown) => {
   return type === key || (typeof key === 'function' && type === key.toString());

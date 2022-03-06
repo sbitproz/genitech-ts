@@ -25,7 +25,7 @@ const api = axios.create({
 
 const unwrapData = (response: AxiosResponse) => response.data
 
-const load = <T>(getUrl: Function) => () => api.get<T>(\`\${getUrl()}\`).then(unwrapData) as Promise<T>
+const load = <T>(getUrl: Function) => () => api.get<T>(\`\${getUrl()}\`).then(unwrapData) as Promise<T[]>
 
 const find = <T>(getUrlWithId: Function) => (id: string) => api.get<T>(\`\${getUrlWithId(id)}\`).then(unwrapData) as Promise<T>
 
