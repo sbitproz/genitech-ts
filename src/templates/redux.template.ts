@@ -3,23 +3,33 @@ import { Config } from "@interfaces/buildBase.interface";
 import { Generator } from "@interfaces/template.interface";
 import { translate } from "@util/buildBase/buildBase";
 import { moduleLibLocation } from "@util/commands/package.helpers";
+import { sagaSnippets } from "./reduxSaga.snippets";
+
 
 const generate = (config: Config) => {
   const template = `
 import { configureStore } from '@reduxjs/toolkit'
 import { Action } from 'redux';
 import { rootEpic } from './root.epic';
+${sagaSnippets.import}
 {{#each entities}}
 import {{this.variations.refs}}Reducer from './{{this.variations.ref}}.slice';
 {{/each}}
+
+${sagaSnippets.configure}
 
 export const store = configureStore({
   reducer: {
     {{#each entities}}
       {{this.variations.refs}}: {{this.variations.refs}}Reducer,
     {{/each}}
-  }
+  },
+  middleware: [
+    ${sagaSnippets.middleware}
+  ]
 })
+
+${sagaSnippets.run}
 
 export const rootState = store.getState();
 

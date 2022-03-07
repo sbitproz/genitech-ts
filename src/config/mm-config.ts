@@ -93,8 +93,9 @@ const loginSchema: Schema = {
 export const config: Config = {
   name: "mentor-mee",
   application: "web-app",
-  data: true,
   observable: true,
+  reduxObservable: false,
+  reduxSaga: false,
   firebase: true,
   scope: "acme",
   events,

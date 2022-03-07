@@ -19,25 +19,30 @@ const generate = (config: Config) => {
 
     ${generateTsLibrary('core-state')}
 
-    {{#if this.data}}
-      {{#each entities}}
+    {{#each entities}}
     nx g slice {{this.variations.ref}} --project core-state &&
-      {{/each}}
-    {{/if}}
+    {{/each}}
 
     ${generateTsLibrary('core-types')}
     ${generateTsLibrary('core-data')}
     ${generateTsLibrary('core-auth')}
     
-    yarn add @mui/material @mui/styled-engine-sc styled-components @mui/icons-material redux-observable &&
+    yarn add @mui/material @mui/styled-engine-sc styled-components @mui/icons-material && 
 
-    {{#if this.data}}
     yarn add axios &&
 
-      {{#if this.observable}}
-    yarn add rxjs &&
-      {{/if}}  
-    {{/if}}
+    {{#if this.reduxObservable}}
+      yarn add redux-observable
+    {{/if}}  
+
+    {{#if this.reduxSaga}}
+      yarn add redux-saga
+    {{/if}}  
+
+
+    {{#if this.observable}}
+      yarn add rxjs &&
+    {{/if}}  
 
     yarn add @reduxjs\/toolkit &&
     yarn add react-redux &&
