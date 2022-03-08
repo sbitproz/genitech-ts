@@ -3,14 +3,14 @@ import { Config } from "@interfaces/buildBase.interface";
 import { Generator } from "@interfaces/template.interface";
 import { translate } from "@util/buildBase/buildBase";
 import { moduleLibLocation } from "@util/commands/package.helpers";
+import { observableSnippets } from "./reduxEpic.snippets";
 import { sagaSnippets } from "./reduxSaga.snippets";
 
 
 const generate = (config: Config) => {
   const template = `
 import { configureStore } from '@reduxjs/toolkit'
-import { Action } from 'redux';
-import { rootEpic } from './root.epic';
+${observableSnippets.import}
 ${sagaSnippets.import}
 {{#each entities}}
 import {{this.variations.refs}}Reducer from './{{this.variations.ref}}.slice';
@@ -24,10 +24,13 @@ export const store = configureStore({
       {{this.variations.refs}}: {{this.variations.refs}}Reducer,
     {{/each}}
   },
-  middleware: [
-    ${sagaSnippets.middleware}
-  ]
+  middleware:  (getDefaultMiddleware) => getDefaultMiddleware({
+    serializableCheck: false,
+    thunk: false
+  })${sagaSnippets.middleware}
 })
+
+
 
 ${sagaSnippets.run}
 

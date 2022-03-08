@@ -1,22 +1,9 @@
+export const sagaCondition = (contents: string) => `{{#if reduxSaga}}${contents}{{/if}}`
+
 export const sagaSnippets = {
-  import: `
-  {{#if reduxSaga}}
-  import createSagaMiddleware from 'redux-saga'
-  {{/if}}
-    `,
-  configure: `
-  {{#if reduxSaga}}
-  const sagaMiddleware = createSagaMiddleware()
-  {{/if}}
-  `,
-  middleware: `
-  {{#if reduxSaga}}
-  sagaMiddleware,
-  {{/if}}
-  `,
-  run: `
-  {{#if reduxSaga}}
-  sagaMiddleware.run(helloSaga)
-  {{/if}}
-  `,
+  import: `${sagaCondition(`import createSagaMiddleware from 'redux-saga';
+import { rootSaga } from './root.saga';`)}`,
+  configure: sagaCondition("const sagaMiddleware = createSagaMiddleware()"),
+  middleware: sagaCondition(".concat(sagaMiddleware)"),
+  run: sagaCondition("sagaMiddleware.run(rootSaga)"),
 };
