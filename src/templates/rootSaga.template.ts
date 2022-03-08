@@ -8,7 +8,7 @@ const generate = (config: Config) => {
   const template = `
 import { all, fork } from 'redux-saga/effects';
 {{#each entities}}
-import {{model}}Saga from './{{model}}.saga';
+import {{model}}Saga from './{{model}}/{{model}}.saga';
 {{/each}}      
 
 

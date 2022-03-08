@@ -1,7 +1,16 @@
 import { Config, Schema } from "../interfaces/buildBase.interface";
 import { MODULE } from "./module.constants";
 
-const events = ["enrol", "leave"];
+const events: Schema[] = [
+  {
+    model: "uploadResource",
+    modelPlural: "uploadResources",
+  },
+  {
+    model: "uploadResource",
+    modelPlural: "uploadProfilePicture",
+  },
+];
 
 const sprintSchema: Schema = {
   model: "sprint",
@@ -124,6 +133,7 @@ export const config: Config = {
   reduxObservable: false,
   reduxSaga: true,
   firebase: true,
+  firebaseAPI: true,
   scope: "acme",
   events,
   baseEndpoint: "mentor-mee",
@@ -147,10 +157,4 @@ export const config: Config = {
     home: homeSchema,
     login: loginSchema,
   },
-};
-
-const suffixes = {
-  style: `--style=scss`,
-  lib: `--parent-module=apps/${config.application}/src/app/app.module.ts`,
-  component: `-m app.module.ts --style=scss`,
 };

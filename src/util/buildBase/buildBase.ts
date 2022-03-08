@@ -41,24 +41,6 @@ const constantCase = transformPipe(strip, addUnderscores, uppercase);
 export const buildSingleParam = (v: NameVariations) => `${v.ref}: ${v.model}`;
 export const buildMultiParam = (v: NameVariations) => `${v.refs}: ${v.model}[]`;
 
-/* 
-  Example:
-  const course: Schema = {
-    model: "userCourse",
-    model: "userCourses",
-    variations: {
-      ref: "userCourse",
-      refs: "userCourses",
-      model: "UserCourse",
-      models: "UserCourses",
-      selector: "selectUserCourse",
-      selector: "selectUserCourses",
-      singleParams: "userCourses: UserCouse",
-      multiParam: "userCourses: UserCouse[]"
-    }
-  }
-*/
-
 const buildBase = (schema: Schema): NameVariations => ({
   ref: camelCase(schema.model),
   refs: camelCase(schema.modelPlural),
@@ -79,7 +61,11 @@ const addParams = (variations: NameVariations) => ({
 
 export const buildNameVariation = transformPipe(buildBase, addParams);
 
-export const prepareConfig = (config: Config) => ({ ...config, entities: [...config.entities.map(entity => ({ ...entity, variations: buildNameVariation(entity) }))] });
+export const prepareConfig = ({ entities, events, ...config}: Config) => ({ 
+  ...config, 
+  entities: [...entities.map(entity => ({ ...entity, variations: buildNameVariation(entity) }))],
+  events: [...events.map(event => ({ ...buildNameVariation(event) }))],
+});
 
 export const translate = (template: any, config: Config, other?: any) =>  Handlebars.compile(template)({ ...config, ...flatten(other) })
 

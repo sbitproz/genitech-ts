@@ -3,8 +3,8 @@ import { Config } from "@interfaces/buildBase.interface";
 import { Generator } from "@interfaces/template.interface";
 import { translate } from "@util/buildBase/buildBase";
 import { moduleLibLocation } from "@util/commands/package.helpers";
-import { observableSnippets } from "./reduxEpic.snippets";
-import { sagaSnippets } from "./reduxSaga.snippets";
+import { observableSnippets } from "../snippets/reduxEpic.snippets";
+import { sagaSnippets } from "../snippets/reduxSaga.snippets";
 
 
 const generate = (config: Config) => {
@@ -13,7 +13,7 @@ import { configureStore } from '@reduxjs/toolkit'
 ${observableSnippets.import}
 ${sagaSnippets.import}
 {{#each entities}}
-import {{this.variations.refs}}Reducer from './{{this.variations.ref}}.slice';
+import {{this.variations.refs}}Reducer from './{{this.variations.ref}}/{{this.variations.ref}}.slice';
 {{/each}}
 
 ${sagaSnippets.configure}

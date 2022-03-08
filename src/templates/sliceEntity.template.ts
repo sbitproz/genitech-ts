@@ -70,7 +70,7 @@ export const list{{models}}Error = createAction<string>('{{refs}}/list{{models}}
   return {
     template: translate(template, config, entity),
     title: `Slice for ${entity.variations.refs}`,
-    fileName: `${moduleLibLocation(MODULE.STATE)}${entity.variations.ref}.slice.ts`,
+    fileName: `${moduleLibLocation(MODULE.STATE)}${entity.variations.ref}/${entity.variations.ref}.slice.ts`,
   };
 };
 

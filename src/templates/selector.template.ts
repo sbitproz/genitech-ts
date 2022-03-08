@@ -30,7 +30,7 @@ export default {{ref}}Slice.reducer
   return {
     template: translate(template, config, entity),
     title: `Slice for ${entity.variations.refs}`,
-    fileName: `${moduleLibLocation(MODULE.STATE)}${entity.variations.ref}.selectors.ts`,
+    fileName: `${moduleLibLocation(MODULE.STATE)}${entity.variations.ref}/${entity.variations.ref}.selectors.ts`,
   };
 };
 

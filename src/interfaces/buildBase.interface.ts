@@ -48,11 +48,11 @@ export interface NameVariations {
 
 export interface Config {
   name: string;
-  events: string[];
   observable?: boolean;
   reduxObservable?: boolean;
   reduxSaga?: boolean;
   firebase?: boolean;
+  firebaseAPI?: boolean;
   application: string;
   scope: string;
   type: string;
@@ -61,6 +61,7 @@ export interface Config {
   dependencies?: string[];
   libs?: string[];
   entities?: Schema[];
+  events?: Schema[];
   detached?: {
     [key: string]: Schema;
   };
