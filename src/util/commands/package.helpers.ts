@@ -4,10 +4,10 @@ import { GenerateReturn } from "@interfaces/template.interface";
 
 export const getZip = () => new JSZip();
 
-export const zipPackageElement = (config, zip) => (element: GenerateReturn) => {
+export const zipPackageElement = (fileName: string, zip) => (element: GenerateReturn) => {
     zip.file(element.fileName, element.template);
     zip.generateAsync({ type: 'arraybuffer' }).then((content) => {
-        fs.writeFileSync(`./${config.name}.zip`, Buffer.from(content))
+        fs.writeFileSync(`./${fileName}.zip`, Buffer.from(content))
     });
 }
 

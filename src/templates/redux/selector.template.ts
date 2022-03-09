@@ -1,8 +1,8 @@
-import { MODULE } from "../config/module.constants";
-import { Config, Schema } from "../interfaces/buildBase.interface";
-import { GeneratorEntity } from "../interfaces/template.interface";
-import { translate } from "../util/buildBase/buildBase";
-import { moduleLibLocation } from "../util/commands/package.helpers";
+import { MODULE } from "@config/module.constants";
+import { Config, Schema } from "@interfaces/buildBase.interface";
+import { GeneratorEntity } from "@interfaces/template.interface";
+import { translate } from "@util/buildBase/buildBase";
+import { moduleLibLocation } from "@util/commands/package.helpers";
 
 const generate = (config: Config, entity: Schema) => {
   const template = `

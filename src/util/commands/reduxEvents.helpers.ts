@@ -1,61 +1,45 @@
-import GeneratorSlice from "@templates/sliceEntity.template";
-import GeneratorEpic from "@templates/epicEntity.template";
-import GeneratorRootEpic from "@templates/rootEpic.template";
-import GeneratorSaga from "@templates/sagaEntity.template";
-import GeneratorRootSaga from "@templates/rootSaga.template";
-import GeneratorSelector from "@templates/selector.template";
-import GeneratorLibrary from "@templates/libraryExport.templates";
-import GeneratorCore from "@templates/redux.template";
-import {
-  generatorCore,
-  generatorOther,
-  generatorEntity,
-} from "@util/buildBase/generatorRunner";
+import GeneratorLibrary from "@templates/core/libraryExport.templates";
+import { generatorOther, generatorEvents } from "@util/buildBase/generatorRunner";
 import { Config } from "@interfaces/buildBase.interface";
 import { MODULE } from "@config/module.constants";
+import EventSagaGenerator from "@templates/events/reduxEventSagas.template";
+import EventActionsGenerator from "@templates/events/reduxEventActions.template";
 
-const extensions = (config: Config) => ["slice", "selectors"]
+// Generate Saga + Action for each event,
+// Create and index file export under the events folder
+
+const extensions = (config: Config) => ["actions"]
   .concat(config.reduxObservable ? ["epics"] : [])
   .concat(config.reduxSaga ? ["saga"] : [])
 
 const reduxEntityFiles = (config: Config) =>
-  config.entities.reduce(
-    (files, entity) => {
-      const { ref } = entity.variations;
+  config.events?.reduce(
+    (files, event) => {
+      const { ref } = event.variations;
       return [...files, ...extensions(config).map((ext) => `${ref}/${ref}.${ext}`)];
     },
-    ["store"]
+    []
   );
-
-const reduxObservable = (config: Config) =>
-  config.reduxObservable
-    ? [
-        { func: generatorEntity(GeneratorEpic), params: { config } },
-        { func: generatorEntity(GeneratorRootEpic), params: { config } },
-      ]
-    : [];
 
 const sagaObservable = (config: Config) =>
     config.reduxSaga
       ? [
-          { func: generatorEntity(GeneratorSaga), params: { config } },
-          { func: generatorEntity(GeneratorRootSaga), params: { config } },
+          { func: generatorEvents(EventSagaGenerator), params: { config } },
+          { func: generatorEvents(EventActionsGenerator), params: { config } },
         ]
       : [];
   
 
-export const reduxGenerators = (config: Config) => [
-  { func: generatorCore(GeneratorCore), params: { config } },
-  { func: generatorEntity(GeneratorSlice), params: { config } },
-  { func: generatorEntity(GeneratorSelector), params: { config } },
+export const reduxEventsGenerators = (config: Config) => [
   {
     func: generatorOther(
       GeneratorLibrary,
       MODULE.STATE,
-      reduxEntityFiles(config)
+      reduxEntityFiles(config),
+      'lib/events/',
+      ''
     ),
     params: { config },
   },
-  ...reduxObservable(config),
   ...sagaObservable(config),
 ];

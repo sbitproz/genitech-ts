@@ -1,6 +1,6 @@
-import { Config } from "../interfaces/buildBase.interface";
-import { translate } from "../util/buildBase/buildBase";
-import { Generator } from "../interfaces/template.interface";
+import { Config } from "@interfaces/buildBase.interface";
+import { translate } from "@util/buildBase/buildBase";
+import { Generator } from "@interfaces/template.interface";
 
 const generate = (config: Config) => {
   const template = `

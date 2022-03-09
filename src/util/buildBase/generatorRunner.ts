@@ -1,7 +1,11 @@
 import { Config } from "@interfaces/buildBase.interface";
 import { GeneratorEntity, Generator as GeneratorCore } from "@interfaces/template.interface";
 
-export const generatorEntity = (Generator: GeneratorEntity) => (config: Config) => config.entities.map((entity) => Generator.generate(config, entity));
+export const generatorIterator = (Generator: GeneratorEntity, key: string) => (config: Config) => config[key].map((item) => Generator.generate(config, item));
+
+export const generatorEntity = (Generator: GeneratorEntity) => generatorIterator(Generator, 'entities');
+
+export const generatorEvents = (Generator: GeneratorEntity) => generatorIterator(Generator, 'events');
 
 export const generatorCore = (Generator: GeneratorCore) => (config: Config) => Generator.generate(config);
 

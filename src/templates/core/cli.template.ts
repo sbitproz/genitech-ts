@@ -1,6 +1,6 @@
-import { Config } from "../interfaces/buildBase.interface";
-import { translate } from "../util/buildBase/buildBase";
-import { Generator } from "../interfaces/template.interface";
+import { Config } from "@interfaces/buildBase.interface";
+import { translate } from "@util/buildBase/buildBase";
+import { Generator } from "@interfaces/template.interface";
 
 const generateTsLibrary = (name: string) => `nx generate @nrwl/workspace:library --name=${name} --buildable &&`
 

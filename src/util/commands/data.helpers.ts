@@ -1,7 +1,7 @@
 import { Config } from "@interfaces/buildBase.interface";
-import GeneratorEntity from "@templates/dataEntity.template";
-import GeneratorLibrary from "@templates/libraryExport.templates";
-import GeneratorCore from "@templates/dataCore.templates";
+import GeneratorEntity from "@templates/data/dataEntity.template";
+import GeneratorLibrary from "@templates/core/libraryExport.templates";
+import GeneratorCore from "@templates/data/dataCore.templates";
 import { generatorCore, generatorOther, generatorEntity } from "@util/buildBase/generatorRunner";
 import { MODULE } from "@config/module.constants";
 

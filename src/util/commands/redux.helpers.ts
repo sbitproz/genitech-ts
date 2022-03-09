@@ -1,11 +1,11 @@
-import GeneratorSlice from "@templates/sliceEntity.template";
-import GeneratorEpic from "@templates/epicEntity.template";
-import GeneratorRootEpic from "@templates/rootEpic.template";
-import GeneratorSaga from "@templates/sagaEntity.template";
-import GeneratorRootSaga from "@templates/rootSaga.template";
-import GeneratorSelector from "@templates/selector.template";
-import GeneratorLibrary from "@templates/libraryExport.templates";
-import GeneratorCore from "@templates/redux.template";
+import GeneratorSlice from "@templates/redux/sliceEntity.template";
+import GeneratorEpic from "@templates/redux/epicEntity.template";
+import GeneratorRootEpic from "@templates/redux/rootEpic.template";
+import GeneratorSaga from "@templates/redux/sagaEntity.template";
+import GeneratorRootSaga from "@templates/redux/rootSaga.template";
+import GeneratorSelector from "@templates/redux/selector.template";
+import GeneratorLibrary from "@templates/core/libraryExport.templates";
+import GeneratorCore from "@templates/redux/redux.template";
 import {
   generatorCore,
   generatorOther,
@@ -24,7 +24,7 @@ const reduxEntityFiles = (config: Config) =>
       const { ref } = entity.variations;
       return [...files, ...extensions(config).map((ext) => `${ref}/${ref}.${ext}`)];
     },
-    ["store"]
+    ["store", 'events']
   );
 
 const reduxObservable = (config: Config) =>
@@ -35,7 +35,7 @@ const reduxObservable = (config: Config) =>
       ]
     : [];
 
-const sagaObservable = (config: Config) =>
+const reduxSagas = (config: Config) =>
     config.reduxSaga
       ? [
           { func: generatorEntity(GeneratorSaga), params: { config } },
@@ -57,5 +57,5 @@ export const reduxGenerators = (config: Config) => [
     params: { config },
   },
   ...reduxObservable(config),
-  ...sagaObservable(config),
+  ...reduxSagas(config),
 ];

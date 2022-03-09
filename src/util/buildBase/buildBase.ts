@@ -1,5 +1,5 @@
 import Handlebars from 'handlebars';
-import { Config, NameVariations, Schema } from '../../interfaces/buildBase.interface';
+import { Config, NameVariations, Schema } from '@interfaces/buildBase.interface';
 
 /*
 https://chaseadams.io/posts/most-common-programming-case-types/
@@ -64,7 +64,7 @@ export const buildNameVariation = transformPipe(buildBase, addParams);
 export const prepareConfig = ({ entities, events, ...config}: Config) => ({ 
   ...config, 
   entities: [...entities.map(entity => ({ ...entity, variations: buildNameVariation(entity) }))],
-  events: [...events.map(event => ({ ...buildNameVariation(event) }))],
+  events: [...events.map(event => ({...event, variations: buildNameVariation(event) }))],
 });
 
 export const translate = (template: any, config: Config, other?: any) =>  Handlebars.compile(template)({ ...config, ...flatten(other) })

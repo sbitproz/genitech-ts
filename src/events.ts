@@ -1,5 +1,5 @@
-import { config, mentorSchema } from "./config/mm-config";
-import { commands } from "@commands/buildProject";
+import { config } from "@config/mm-config";
+import { commands } from "@commands/buildEvents";
 import '@util/handlebars/helpers';
 
-commands(mentorSchema, config);
+commands(config);

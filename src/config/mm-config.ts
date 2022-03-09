@@ -1,4 +1,4 @@
-import { Config, Schema } from "../interfaces/buildBase.interface";
+import { Config, Schema } from "@interfaces/buildBase.interface";
 import { MODULE } from "./module.constants";
 
 const events: Schema[] = [
@@ -7,8 +7,8 @@ const events: Schema[] = [
     modelPlural: "uploadResources",
   },
   {
-    model: "uploadResource",
-    modelPlural: "uploadProfilePicture",
+    model: "uploadProfilePicture",
+    modelPlural: "uploadProfilePictures",
   },
 ];
 
