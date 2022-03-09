@@ -1,5 +1,5 @@
 import Handlebars from "handlebars";
-import { calculateTypes } from "@util/commands/type.helpers";
+import { calculateTypes } from "commands/type.helpers";
 
 Handlebars.registerHelper("times", function (n, block) {
   var accum = "";

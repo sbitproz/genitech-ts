@@ -1,6 +1,6 @@
 import { Config } from "@interfaces/buildBase.interface";
-import { translate } from "@util/buildBase/buildBase";
-import { moduleLibLocation } from "@util/commands/package.helpers";
+import { translate } from "builders/buildBase";
+import { moduleLibLocation } from "commands/package.helpers";
 import { MODULE } from "@config/module.constants";
 import { Generator } from "@interfaces/template.interface";
 import { firebaseSnippets } from "../../snippets/firebase.snippets";

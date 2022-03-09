@@ -12,8 +12,9 @@
         "@interfaces/*": ["interfaces/*"],
         "@templates/*": ["templates/*"],
         "@util/*": ["util/*"],
-        "@commands/*": ["util/commands/*"],
-        "@snippets/*": ["snippets/*"]
+        "@commands/*": ["commands/*"],
+        "@snippets/*": ["snippets/*"],
+        "@builders/*": ["builders/*"]
     },
   },
   "lib": ["es2015"]

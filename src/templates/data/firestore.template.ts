@@ -1,5 +1,5 @@
 import { Config } from "@interfaces/buildBase.interface";
-import { translate } from "@util/buildBase/buildBase";
+import { translate } from "builders/buildBase";
 import { Generator } from "@interfaces/template.interface";
 
 const generate = (config: Config) => {

@@ -1,6 +1,6 @@
 import { Config, Schema } from "@interfaces/buildBase.interface";
-import { translate } from "@util/buildBase/buildBase";
-import { moduleLibLocation } from "@util/commands/package.helpers";
+import { translate } from "builders/buildBase";
+import { moduleLibLocation } from "commands/package.helpers";
 import { MODULE } from "@config/module.constants";
 import { GeneratorEntity } from "@interfaces/template.interface";
 

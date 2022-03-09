@@ -1,11 +1,11 @@
 import { Config } from "@interfaces/buildBase.interface";
-import { prepareConfig } from "../buildBase/buildBase";
-import { reduxGenerators } from './redux.helpers';
-import { workspaceGenerators } from "./workspace.helpers";
-import { getZip, zipPackageElement } from "./package.helpers";
-import { dataGenerators } from "./data.helpers";
-import { mockGenerators } from "./mock.helpers";
-import { typeGenerators } from "./type.helpers";
+import { prepareConfig } from "./buildBase";
+import { reduxGenerators } from '../commands/redux.helpers';
+import { workspaceGenerators } from "../commands/workspace.helpers";
+import { getZip, zipPackageElement } from "../commands/package.helpers";
+import { dataGenerators } from "../commands/data.helpers";
+import { mockGenerators } from "../commands/mock.helpers";
+import { typeGenerators } from "../commands/type.helpers";
 
 export const commands = (sourceConfig: Config) => {
   const zip = getZip();

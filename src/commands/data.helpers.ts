@@ -2,7 +2,7 @@ import { Config } from "@interfaces/buildBase.interface";
 import GeneratorEntity from "@templates/data/dataEntity.template";
 import GeneratorLibrary from "@templates/core/libraryExport.templates";
 import GeneratorCore from "@templates/data/dataCore.templates";
-import { generatorCore, generatorOther, generatorEntity } from "@util/buildBase/generatorRunner";
+import { generatorCore, generatorOther, generatorEntity } from "builders/generatorRunner";
 import { MODULE } from "@config/module.constants";
 
 const dataEntityFiles = (config: Config) => config.entities.map(entity => `${entity.variations.ref}.service`)

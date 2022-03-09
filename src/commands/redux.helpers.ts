@@ -10,7 +10,7 @@ import {
   generatorCore,
   generatorOther,
   generatorEntity,
-} from "@util/buildBase/generatorRunner";
+} from "builders/generatorRunner";
 import { Config } from "@interfaces/buildBase.interface";
 import { MODULE } from "@config/module.constants";
 

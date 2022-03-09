@@ -1,5 +1,5 @@
 import { config } from "@config/mm-config";
-import { commands } from "@commands/buildProject";
-import '@util/handlebars/helpers';
+import { commands } from "@builders/buildProject";
+import 'handlebars/helpers';
 
 commands(config);
