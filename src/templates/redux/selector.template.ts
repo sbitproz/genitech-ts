@@ -7,7 +7,7 @@ import { moduleLibLocation } from "commands/package.helpers";
 const generate = (config: Config, entity: Schema) => {
   const template = `
 import { createSelector } from '@reduxjs/toolkit';
-import { RootState } from './store';
+import { RootState } from '../store';
 import { {{ref}}SliceAdapter, {{ref}}Slice, {{model}}Slice, {{constants}}_SLICE_FEATURE_KEY } from './{{ref}}.slice';
 
 const { selectAll, selectEntities } = {{ref}}SliceAdapter.getSelectors();

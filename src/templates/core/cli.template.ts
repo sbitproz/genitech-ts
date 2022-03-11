@@ -18,11 +18,6 @@ const generate = (config: Config) => {
     mv package-temp.json package.json &&
 
     ${generateTsLibrary('core-state')}
-
-    {{#each entities}}
-    nx g slice {{this.variations.ref}} --project core-state &&
-    {{/each}}
-
     ${generateTsLibrary('core-types')}
     ${generateTsLibrary('core-data')}
     ${generateTsLibrary('core-auth')}

@@ -3,6 +3,7 @@ import GeneratorEpic from "@templates/redux/epicEntity.template";
 import GeneratorRootEpic from "@templates/redux/rootEpic.template";
 import GeneratorSaga from "@templates/redux/sagaEntity.template";
 import GeneratorRootSaga from "@templates/redux/rootSaga.template";
+import GeneratorSagaTypes from "@templates/redux/sagaTypes.template";
 import GeneratorSelector from "@templates/redux/selector.template";
 import GeneratorLibrary from "@templates/core/libraryExport.templates";
 import GeneratorCore from "@templates/redux/redux.template";
@@ -56,6 +57,7 @@ export const reduxGenerators = (config: Config) => [
     ),
     params: { config },
   },
+  { func: generatorCore(GeneratorSagaTypes), params: { config } },
   ...reduxObservable(config),
   ...reduxSagas(config),
 ];

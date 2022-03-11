@@ -6,8 +6,10 @@ import { GeneratorEntity } from "@interfaces/template.interface";
 
 const generate = (config: Config, entity: Schema) => {
   const template = `
-import { call, put, takeLatest } from 'redux-saga/effects'
-import { {{refs}}API } from '@{{name}}/core-data';
+import { call, put, takeLatest, CallEffect } from 'redux-saga/effects'
+import { PayloadAction } from '@reduxjs/toolkit';
+import { {{refs}}API, BaseEntity } from '@{{name}}/core-data';
+import { PutPayload } from "../saga.types";
 import { 
   fetch{{model}}, fetch{{model}}Error, {{ref}}Fetched, 
   list{{models}}, list{{models}}Error, {{refs}}Listed,
@@ -16,36 +18,36 @@ import {
 } from './{{ref}}.slice';
 import { {{model}} } from '@{{name}}/core-types';
 
-function* fetch{{model}}Saga(action: any): Generator<any,any> {
+function* fetch{{model}}Saga(action: PayloadAction<BaseEntity>): Generator<CallEffect<BaseEntity> | PutPayload<{{model}}> | PutPayload<string>, void, {{model}}> {
   try {
-      const {{ref}} = (yield call({{refs}}API.find, action.payload.id)) as {{model}};
+      const {{ref}} = yield call({{refs}}API.find, action.payload.id);
       yield put({{ref}}Fetched({{ref}}));
   } catch (e: any) {
       yield put(fetch{{model}}Error(e.message));
   }
 }
 
-function* list{{models}}Saga(): Generator<any,any> {
+function* list{{models}}Saga(): Generator<CallEffect | PutPayload<{{model}}[]> | PutPayload<string>, void, {{model}}[]> {
   try {
-      const {{refs}} = (yield call({{refs}}API.load)) as {{model}}[];
+      const {{refs}} = yield call({{refs}}API.load);
       yield put({{refs}}Listed({{refs}}));
   } catch (e: any) {
       yield put(list{{models}}Error(e.message));
   }
 }
 
-function* update{{model}}Saga(action: any): Generator<any,any> {
+function* update{{model}}Saga(action: PayloadAction<{{model}}>): Generator<CallEffect<{{model}}> | PutPayload<{{model}}> | PutPayload<string>, void, {{model}}> { 
   try {
-      const {{ref}} = (yield call({{refs}}API.update, action.payload)) as {{model}};
+      const {{ref}} = yield call({{refs}}API.update, action.payload);
       yield put({{ref}}Updated({id: {{ref}}.id, changes: {{ref}} }));
   } catch (e: any) {
       yield put(update{{model}}Error(e.message));
   }
 }
 
-function* remove{{model}}Saga(action: any): Generator<any,any> {
+function* remove{{model}}Saga(action: PayloadAction<BaseEntity>): Generator<CallEffect<BaseEntity> | PutPayload<BaseEntity> | PutPayload<string>, void, {{model}}> {
   try {
-      const {{ref}} = (yield call({{refs}}API.remove, action.payload.id)) as {{model}};
+      const {{ref}} = yield call({{refs}}API.remove, action.payload.id);
       yield put({{ref}}Removed({{ref}}.id));
   } catch (e: any) {
       yield put(remove{{model}}Error(e.message));

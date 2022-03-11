@@ -11,8 +11,7 @@ import axios, { AxiosResponse } from 'axios';
 
 const BASE_URL = {
   dev: "http://localhost:3004/",
-  firebase: ${firebaseSnippets.baseEndpoint},
-  prod: "${config.baseEndpoint}",
+  prod: "${config.firebaseAPI ? firebaseSnippets.baseEndpoint : config.baseEndpoint}",
 }
 
 export interface BaseEntity {
@@ -27,17 +26,17 @@ const api = axios.create({
 
 const unwrapData = (response: AxiosResponse) => response.data
 
-const load = <T>(getUrl: Function) => () => api.get<T>(\`\${getUrl()}\`).then(unwrapData) as Promise<T[]>
+const load = <T>(getUrl: () => string) => () => api.get<T>(\`\${getUrl()}\`).then(unwrapData) as Promise<T[]>
 
-const find = <T>(getUrlWithId: Function) => (id: string) => api.get<T>(\`\${getUrlWithId(id)}\`).then(unwrapData) as Promise<T>
+const find = <T>(getUrlWithId: (id: string) => string) => (id: string) => api.get<T>(\`\${getUrlWithId(id)}\`).then(unwrapData) as Promise<T>
 
-const create = <T>(getUrl: Function) => (entity: BaseEntity) => api.post<T>(\`\${getUrl()}\`, entity).then(unwrapData) as Promise<T>
+const create = <T>(getUrl: () => string) => (entity: BaseEntity) => api.post<T>(\`\${getUrl()}\`, entity).then(unwrapData) as Promise<T>
 
-const update = <T>(getUrlWithId: Function) => (entity: BaseEntity) => api.patch<T>(\`\${getUrlWithId(entity.id)}\`, entity).then(unwrapData) as Promise<T>
+const update = <T>(getUrlWithId: (id: string) => string) => (entity: BaseEntity) => api.patch<T>(\`\${getUrlWithId(entity.id)}\`, entity).then(unwrapData) as Promise<T>
 
-const remove = <T>(getUrlWithId: Function) => (id: string) => api.delete<T>(\`\${getUrlWithId(id)}\`).then(unwrapData) as Promise<T>
+const remove = <T>(getUrlWithId: (id: string) => string) => (id: string) => api.delete<T>(\`\${getUrlWithId(id)}\`).then(unwrapData) as Promise<T>
 
-export const baseAPI = <T>(getUrl: Function, getUrlWithId: Function) => ({
+export const baseAPI = <T>(getUrl: () => string, getUrlWithId: (id: string) => string) => ({
   load: load<T>(getUrl),
   find: find<T>(getUrlWithId),
   create: create<T>(getUrl),

@@ -12,6 +12,7 @@ const events: Schema[] = [
   },
 ];
 
+
 const sprintSchema: Schema = {
   model: "sprint",
   modelPlural: "sprints",
@@ -133,7 +134,7 @@ export const config: Config = {
   reduxObservable: false,
   reduxSaga: true,
   firebase: true,
-  firebaseAPI: true,
+  firebaseAPI: false,
   scope: "acme",
   events,
   baseEndpoint: "mentor-mee",
@@ -151,7 +152,6 @@ export const config: Config = {
     mentorSchema,
     menteeSchema,
     sprintSchema,
-    // achievablesSchema,
   ],
   detached: {
     home: homeSchema,

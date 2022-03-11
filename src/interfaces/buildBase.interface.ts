@@ -29,6 +29,7 @@ export const BooleanTypes: string[] = [TypeOptions.boolean];
 export interface Schema {
   model: string;
   modelPlural: string;
+  single?: boolean;
   variations?: NameVariations;
   fields?: Field[]
 }
