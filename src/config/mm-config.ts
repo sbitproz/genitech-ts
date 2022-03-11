@@ -13,25 +13,25 @@ const events: Schema[] = [
 ];
 
 const goalsSchema: Schema = {
-  model: "goals",
-  modelPlural: "sprints",
+  model: "goal",
+  modelPlural: "goals",
   pkField: {
-    name: "id",
+    fieldname: "id",
     type: "uuid",
   },
   fields: [
     {
-      name: "title",
+      fieldname: "title",
       type: "lorem",
     },
     {
-      name: "profileDescription",
+      fieldname: "profileDescription",
       type: "lorem",
     },
   ],
   fkFields: [
     {
-      name: "sprintId",
+      fieldname: "sprintId",
       type: "uuid",
     },
   ],
@@ -41,88 +41,88 @@ const sprintSchema: Schema = {
   model: "sprint",
   modelPlural: "sprints",
   pkField: {
-    name: "id",
+    fieldname: "id",
     type: "uuid",
   },
   fields: [
     {
-      name: "title",
+      fieldname: "title",
       type: "lorem",
     },
     {
-      name: "profileDescription",
+      fieldname: "profileDescription",
       type: "lorem",
     },
   ],
   fkFields: [
     {
-      name: "mentorId",
-      type: "lorem",
+      fieldname: "mentorId",
+      type: "uuid",
     },
     {
-      name: "sprintTemplateId",
-      type: "lorem",
+      fieldname: "sprintTemplateId",
+      type: "uuid",
     },
     {
-      name: "menteeId",
-      type: "lorem",
+      fieldname: "menteeId",
+      type: "uuid",
     },
   ],
 };
 
 const goalsTemplateSchema: Schema = {
-  model: "goals",
-  modelPlural: "sprints",
+  model: "goalsTemplate",
+  modelPlural: "goalsTemplates",
   pkField: {
-    name: "id",
+    fieldname: "id",
     type: "uuid",
   },
   fields: [
     {
-      name: "title",
+      fieldname: "title",
       type: "lorem",
     },
     {
-      name: "profileDescription",
+      fieldname: "profileDescription",
       type: "lorem",
     },
   ],
   fkFields: [
     {
-      name: "mentorId",
-      type: "lorem",
+      fieldname: "mentorId",
+      type: "uuid",
     },
     {
-      name: "sprintTemplateId",
-      type: "lorem",
+      fieldname: "sprintTemplateId",
+      type: "uuid",
     },
     {
-      name: "menteeId",
-      type: "lorem",
+      fieldname: "menteeId",
+      type: "uuid",
     },
   ],
 };
 
 const sprintTemplateSchema: Schema = {
-  model: "sprint",
-  modelPlural: "sprints",
+  model: "sprintTemplate",
+  modelPlural: "sprintTemplates",
   pkField: {
-    name: "id",
+    fieldname: "id",
     type: "uuid",
   },
   fields: [
     {
-      name: "title",
+      fieldname: "title",
       type: "lorem",
     },
     {
-      name: "profileDescription",
+      fieldname: "profileDescription",
       type: "lorem",
     },
   ],
   fkFields: [
     {
-      name: "mentorId",
+      fieldname: "mentorId",
       type: "uuid",
     },
   ],
@@ -132,24 +132,24 @@ export const userSchema: Schema = {
   model: "user",
   modelPlural: "users",
   pkField: {
-    name: "id",
+    fieldname: "id",
     type: "uuid",
   },
   fields: [
     {
-      name: "name",
+      fieldname: "name",
       type: "fullname",
     },
     {
-      name: "email",
+      fieldname: "email",
       type: "email",
     },
     {
-      name: "password",
+      fieldname: "password",
       type: "password",
     },
     {
-      name: "lastLogin",
+      fieldname: "lastLogin",
       type: "date",
     },
   ],
@@ -159,20 +159,20 @@ export const mentorSchema: Schema = {
   model: "mentor",
   modelPlural: "mentors",
   pkField: {
-    name: "id",
+    fieldname: "id",
     type: "uuid",
   },
   fields: [
     {
-      name: "slug",
+      fieldname: "slug",
       type: "lorem",
     },
     {
-      name: "profileIntro",
+      fieldname: "profileIntro",
       type: "lorem",
     },
     {
-      name: "profileDescription",
+      fieldname: "profileDescription",
       type: "lorem",
     },
   ],
@@ -182,20 +182,20 @@ export const menteeSchema: Schema = {
   model: "mentee",
   modelPlural: "mentees",
   pkField: {
-    name: "id",
+    fieldname: "id",
     type: "uuid",
   },
   fields: [
     {
-      name: "slug",
+      fieldname: "slug",
       type: "lorem",
     },
     {
-      name: "profileIntro",
+      fieldname: "profileIntro",
       type: "lorem",
     },
     {
-      name: "profileDescription",
+      fieldname: "profileDescription",
       type: "lorem",
     },
   ],

@@ -16,9 +16,11 @@ export enum TypeOptions {
 export type FieldTypes = `${TypeOptions}`;
 
 export type Field = {
-  name: string;
+  fieldname: string;
   type: FieldTypes;
-  variations?: FieldVariations;
+  ref?: string;
+  model?: string;
+  constant?: string;
 }
 
 export const StringTypes: string[] = [TypeOptions.email, TypeOptions.uuid, 
@@ -57,10 +59,8 @@ export interface NameVariations {
 export interface FieldVariations {
   ref: string;
   model: string;
-  selector: string;
   constant?: string;
 }
-
 
 export interface Config {
   name: string;

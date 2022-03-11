@@ -63,10 +63,9 @@ const buildBase = (schema: Schema): NameVariations => ({
 });
 
 const buildFieldBase = (field: Field): FieldVariations => ({
-  ref: camelCase(field.name),
-  model: pascalCase(field.name),
-  selector: `select${pascalCase(field.name)}`,
-  constant: `${constantCase(field.name)}`,
+  ref: camelCase(field.fieldname),
+  model: pascalCase(field.fieldname),
+  constant: `${constantCase(field.fieldname)}`,
 });
 
 const addParams = (variations: NameVariations) => ({
@@ -78,9 +77,10 @@ const addParams = (variations: NameVariations) => ({
 export const buildNameVariation = transformPipe(buildBase, addParams);
 
 export const fieldNameVariation = (fields: Field[]) =>
-  fields.map((field) =>
-    field.fk ? { ...field, variations: buildFieldBase(field) } : field
-  );
+  (fields ?? []).map((field) => ({
+    ...field,
+    ...buildFieldBase(field),
+  }));
 
 export const prepareConfig = ({ entities, events, ...config }: Config) => ({
   ...config,
@@ -88,6 +88,7 @@ export const prepareConfig = ({ entities, events, ...config }: Config) => ({
     ...entities.map((entity) => ({
       ...entity,
       variations: buildNameVariation(entity),
+      fields: [entity.pkField, ...entity.fields, ...(entity.fkFields ?? [])],
       fkFields: fieldNameVariation(entity.fkFields),
     })),
   ],

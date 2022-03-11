@@ -41,7 +41,7 @@ const MockGenerator = {
     Array(30).fill("")
       .map(() => {
         return `{${(entity.fields || []).map(
-          ({ name, type }, idx) => `"${name}": ${generateFieldValue(type) || UNSET}`
+          ({ fieldname: name, type }, idx) => `"${name}": ${generateFieldValue(type) || UNSET}`
         ).join(',')}}`;
       }),
 };

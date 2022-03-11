@@ -10,8 +10,7 @@ import {
   createAction,
   createEntityAdapter,
   createSlice,
-  EntityState,
-  // PayloadAction,
+  EntityState
 } from '@reduxjs/toolkit';
 import { {{model}} } from '@{{name}}/core-types';
     
@@ -38,13 +37,25 @@ export const {{ref}}Slice = createSlice({
     {{ref}}Removed: {{ref}}SliceAdapter.removeOne,
     {{ref}}Updated: {{ref}}SliceAdapter.updateOne,
     {{ref}}Fetched: {{ref}}SliceAdapter.upsertOne,
-    {{refs}}Listed: {{ref}}SliceAdapter.upsertMany,    
+    {{refs}}Listed: {{ref}}SliceAdapter.upsertMany,
+    {{#each fkFields}}
+    {{@root.ref}}By{{model}}Listed: {{@root.ref}}SliceAdapter.upsertMany,
+    {{/each}} 
   },
 });
 
 export default {{ref}}Slice.reducer;
 
-export const { {{ref}}Added, {{ref}}Removed, {{ref}}Updated, {{refs}}Listed, {{ref}}Fetched } = {{ref}}Slice.actions;
+export const { 
+  {{ref}}Added, 
+  {{ref}}Removed, 
+  {{ref}}Updated, 
+  {{refs}}Listed, 
+  {{ref}}Fetched, 
+  {{#each fkFields}}
+  {{@root.ref}}By{{model}}Listed,
+  {{/each}} 
+} = {{ref}}Slice.actions;
 
 export const add{{model}} = createAction<{{model}}>('{{refs}}/add{{model}}');
 
@@ -65,6 +76,13 @@ export const update{{model}}Error = createAction<string>('{{refs}}/update{{model
 export const fetch{{model}}Error = createAction<string>('{{refs}}/fetch{{model}}Error');
 
 export const list{{models}}Error = createAction<string>('{{refs}}/list{{models}}Error');
+
+{{#each fkFields}}
+export const list{{@root.model}}By{{model}}Error = createAction<string>('{{@root.ref}}/list{{@root.model}}By{{model}}Error');
+
+export const list{{@root.model}}By{{model}} = createAction<{ {{fieldname}}: string}>('{{@root.ref}}/listBy{{model}}')
+
+{{/each}} 
 
 `
   return {

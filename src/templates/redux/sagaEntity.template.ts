@@ -14,7 +14,12 @@ import {
   fetch{{model}}, fetch{{model}}Error, {{ref}}Fetched, 
   list{{models}}, list{{models}}Error, {{refs}}Listed,
   {{ref}}Updated , update{{model}}Error, update{{model}},
-  remove{{model}}Error, remove{{model}}, {{ref}}Removed
+  remove{{model}}Error, remove{{model}}, {{ref}}Removed,
+  {{#each fkFields}}
+  list{{@root.model}}By{{model}},
+  list{{@root.model}}By{{model}}Error,
+  {{@root.ref}}By{{this.model}}Listed,
+  {{/each}}
 } from './{{ref}}.slice';
 import { {{model}} } from '@{{name}}/core-types';
 
@@ -54,15 +59,27 @@ function* remove{{model}}Saga(action: PayloadAction<BaseEntity>): Generator<Call
   }
 }
 
-{{#each entities}}
-fork({{model}}Saga),
-{{/each}}      
+{{#each fkFields}}
+function* listBy{{model}}Saga(action: PayloadAction<{ {{ref}}: {{calculateTypes type}} }>): Generator<CallEffect | PutPayload<{{@root.model}}[]> | PutPayload<string>, void, {{@root.model}}[]> {
+  try {
+      const {{@root.ref}} = yield call({{@root.refs}}API.loadBy, '{{fieldname}}', action.payload.{{fieldname}});
+      yield put({{@root.ref}}By{{model}}Listed({{@root.ref}}));
+      
+  } catch (e: any) {
+      yield put(list{{@root.model}}By{{model}}Error(e.message));
+  }
+}
+
+{{/each}} 
 
 function* {{ref}}Saga() {
   yield takeLatest(fetch{{model}}, fetch{{model}}Saga);
   yield takeLatest(list{{models}}, list{{models}}Saga);
   yield takeLatest(update{{model}}, update{{model}}Saga);
   yield takeLatest(remove{{model}}, remove{{model}}Saga);
+  {{#each fkFields}}
+  yield takeLatest(list{{@root.model}}By{{model}}, listBy{{model}}Saga);
+  {{/each}}   
 }
 
 export default {{ref}}Saga;
@@ -70,7 +87,7 @@ export default {{ref}}Saga;
   `
 
   return {
-    template: translate(template,config, entity),
+    template: translate(template, config, entity),
     title: `Saga entity template`,
     fileName: `${moduleLibLocation(MODULE.STATE)}${entity.variations.ref}/${entity.variations.ref}.saga.ts`,
   };
