@@ -54,6 +54,10 @@ function* remove{{model}}Saga(action: PayloadAction<BaseEntity>): Generator<Call
   }
 }
 
+{{#each entities}}
+fork({{model}}Saga),
+{{/each}}      
+
 function* {{ref}}Saga() {
   yield takeLatest(fetch{{model}}, fetch{{model}}Saga);
   yield takeLatest(list{{models}}, list{{models}}Saga);

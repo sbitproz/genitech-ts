@@ -9,13 +9,16 @@ export enum TypeOptions {
   fullname = 'fullname',
   email = 'email',
   password = 'password',
+  date = 'date',
+  dateTime = 'dateTime',
 }
 
 export type FieldTypes = `${TypeOptions}`;
 
-type Field = {
+export type Field = {
   name: string;
   type: FieldTypes;
+  variations?: FieldVariations;
 }
 
 export const StringTypes: string[] = [TypeOptions.email, TypeOptions.uuid, 
@@ -26,12 +29,16 @@ export const NumberTypes: string[] = [TypeOptions.number];
 
 export const BooleanTypes: string[] = [TypeOptions.boolean];
 
+export const DateTimeTypes: string[] = [TypeOptions.date, TypeOptions.dateTime];
+
 export interface Schema {
   model: string;
   modelPlural: string;
   single?: boolean;
   variations?: NameVariations;
-  fields?: Field[]
+  pkField?: Field;
+  fields?: Field[];
+  fkFields?: Field[];
 }
 
 export interface NameVariations {
@@ -46,6 +53,14 @@ export interface NameVariations {
   constant?: string;
   constants?: string;
 }
+
+export interface FieldVariations {
+  ref: string;
+  model: string;
+  selector: string;
+  constant?: string;
+}
+
 
 export interface Config {
   name: string;

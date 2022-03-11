@@ -12,13 +12,117 @@ const events: Schema[] = [
   },
 ];
 
+const goalsSchema: Schema = {
+  model: "goals",
+  modelPlural: "sprints",
+  pkField: {
+    name: "id",
+    type: "uuid",
+  },
+  fields: [
+    {
+      name: "title",
+      type: "lorem",
+    },
+    {
+      name: "profileDescription",
+      type: "lorem",
+    },
+  ],
+  fkFields: [
+    {
+      name: "sprintId",
+      type: "uuid",
+    },
+  ],
+};
 
 const sprintSchema: Schema = {
   model: "sprint",
   modelPlural: "sprints",
+  pkField: {
+    name: "id",
+    type: "uuid",
+  },
   fields: [
     {
-      name: "id",
+      name: "title",
+      type: "lorem",
+    },
+    {
+      name: "profileDescription",
+      type: "lorem",
+    },
+  ],
+  fkFields: [
+    {
+      name: "mentorId",
+      type: "lorem",
+    },
+    {
+      name: "sprintTemplateId",
+      type: "lorem",
+    },
+    {
+      name: "menteeId",
+      type: "lorem",
+    },
+  ],
+};
+
+const goalsTemplateSchema: Schema = {
+  model: "goals",
+  modelPlural: "sprints",
+  pkField: {
+    name: "id",
+    type: "uuid",
+  },
+  fields: [
+    {
+      name: "title",
+      type: "lorem",
+    },
+    {
+      name: "profileDescription",
+      type: "lorem",
+    },
+  ],
+  fkFields: [
+    {
+      name: "mentorId",
+      type: "lorem",
+    },
+    {
+      name: "sprintTemplateId",
+      type: "lorem",
+    },
+    {
+      name: "menteeId",
+      type: "lorem",
+    },
+  ],
+};
+
+const sprintTemplateSchema: Schema = {
+  model: "sprint",
+  modelPlural: "sprints",
+  pkField: {
+    name: "id",
+    type: "uuid",
+  },
+  fields: [
+    {
+      name: "title",
+      type: "lorem",
+    },
+    {
+      name: "profileDescription",
+      type: "lorem",
+    },
+  ],
+  fkFields: [
+    {
+      name: "mentorId",
       type: "uuid",
     },
   ],
@@ -27,11 +131,11 @@ const sprintSchema: Schema = {
 export const userSchema: Schema = {
   model: "user",
   modelPlural: "users",
+  pkField: {
+    name: "id",
+    type: "uuid",
+  },
   fields: [
-    {
-      name: "id",
-      type: "uuid",
-    },
     {
       name: "name",
       type: "fullname",
@@ -41,8 +145,12 @@ export const userSchema: Schema = {
       type: "email",
     },
     {
-      name: "slug",
-      type: "lorem",
+      name: "password",
+      type: "password",
+    },
+    {
+      name: "lastLogin",
+      type: "date",
     },
   ],
 };
@@ -50,26 +158,14 @@ export const userSchema: Schema = {
 export const mentorSchema: Schema = {
   model: "mentor",
   modelPlural: "mentors",
+  pkField: {
+    name: "id",
+    type: "uuid",
+  },
   fields: [
-    {
-      name: "id",
-      type: "uuid",
-    },
     {
       name: "slug",
       type: "lorem",
-    },
-    {
-      name: "password",
-      type: "password",
-    },
-    {
-      name: "name",
-      type: "fullname",
-    },
-    {
-      name: "email",
-      type: "email",
     },
     {
       name: "profileIntro",
@@ -85,26 +181,14 @@ export const mentorSchema: Schema = {
 export const menteeSchema: Schema = {
   model: "mentee",
   modelPlural: "mentees",
+  pkField: {
+    name: "id",
+    type: "uuid",
+  },
   fields: [
-    {
-      name: "id",
-      type: "uuid",
-    },
     {
       name: "slug",
       type: "lorem",
-    },
-    {
-      name: "password",
-      type: "password",
-    },
-    {
-      name: "name",
-      type: "fullname",
-    },
-    {
-      name: "email",
-      type: "email",
     },
     {
       name: "profileIntro",
@@ -152,6 +236,9 @@ export const config: Config = {
     mentorSchema,
     menteeSchema,
     sprintSchema,
+    goalsSchema,
+    sprintTemplateSchema,
+    goalsTemplateSchema,
   ],
   detached: {
     home: homeSchema,
