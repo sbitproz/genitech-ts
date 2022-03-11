@@ -14,7 +14,7 @@ const getUrl = () => \`{{refs}}${firebaseSnippets.apiSuffix}\`;
 
 const getUrlWithId = (id: string) => \`{{refs}}/\${id}${firebaseSnippets.apiSuffix}\`;
 
-const getUrlWithFkId = (fieldName: string, id: string) => \`{{refs}}/\${fieldName}\${id}${firebaseSnippets.apiSuffix}\`;
+const getUrlWithFkId = (fieldName: string, id: string) => \`{{refs}}?\${fieldName}=\${id}${firebaseSnippets.apiSuffix}\`;
 
 export const {{refs}}API = baseAPI<{{model}}>(getUrl, getUrlWithId, getUrlWithFkId);
   `
