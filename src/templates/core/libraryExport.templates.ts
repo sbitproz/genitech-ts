@@ -17,8 +17,8 @@ export * from './${relativeImportLocation ?? 'lib/'}{{this}}';
   };
 };
 
-const DataGenerator: Generator = {
+const LibraryGenerator: Generator = {
   generate,
 };
 
-export default DataGenerator;
+export default LibraryGenerator;

@@ -41,6 +41,7 @@ export const {{ref}}Slice = createSlice({
     {{#each fkFields}}
     {{@root.ref}}By{{model}}Listed: {{@root.ref}}SliceAdapter.upsertMany,
     {{/each}} 
+    removalAll{{model}}: {{ref}}SliceAdapter.removeAll,
   },
 });
 

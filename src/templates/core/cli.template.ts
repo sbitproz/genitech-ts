@@ -1,6 +1,7 @@
 import { Config } from "@interfaces/buildBase.interface";
 import { translate } from "builders/buildBase";
 import { Generator } from "@interfaces/template.interface";
+import { MODULE } from "@config/module.constants";
 
 const generateTsLibrary = (name: string) => `nx generate @nrwl/workspace:library --name=${name} --buildable &&`
 
@@ -17,30 +18,33 @@ const generate = (config: Config) => {
 
     mv package-temp.json package.json &&
 
-    ${generateTsLibrary('core-state')}
-    ${generateTsLibrary('core-types')}
-    ${generateTsLibrary('core-data')}
-    ${generateTsLibrary('core-auth')}
-    
-    yarn add @mui/material @mui/styled-engine-sc styled-components @mui/icons-material && 
+    ${generateTsLibrary(MODULE.STATE)}
+    ${generateTsLibrary(MODULE.INTERFACE)}
+    ${generateTsLibrary(MODULE.DATA)}
+    ${generateTsLibrary(MODULE.LOGIN)}
+
+    nx g @nrwl/react:library --name=${MODULE.UI} --buildable &&
+
+    yarn add @mui/material@^5.4.0 @mui/icons-material@^5.3.1 @mui/styled-engine-sc @emotion/react@^11.7.1 @emotion/styled@^11.6.0 polished@^4.1.4 && 
 
     yarn add axios &&
 
     {{#if this.reduxObservable}}
-      yarn add redux-observable
+      yarn add redux-observable@^2.0.0
+
     {{/if}}  
 
     {{#if this.reduxSaga}}
-      yarn add redux-saga
+      yarn add redux-saga@^1.1.3
     {{/if}}  
 
 
     {{#if this.observable}}
-      yarn add rxjs &&
+      yarn add rxjs@^7.5.5 &&
     {{/if}}  
 
-    yarn add @reduxjs\/toolkit &&
-    yarn add react-redux &&
+    yarn add @reduxjs\/toolkit@^1.8.0 &&
+    yarn add react-redux@^7.2.6 &&
 
     yarn config set "strict-ssl" true
   `

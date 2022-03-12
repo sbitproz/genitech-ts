@@ -70,9 +70,9 @@ const sprintSchema: Schema = {
   ],
 };
 
-const goalsTemplateSchema: Schema = {
-  model: "goalsTemplate",
-  modelPlural: "goalsTemplates",
+const goalTemplatesSchema: Schema = {
+  model: "goalTemplate",
+  modelPlural: "goalTemplates",
   pkField: {
     fieldname: "id",
     type: "uuid",
@@ -238,7 +238,7 @@ export const config: Config = {
     sprintSchema,
     goalsSchema,
     sprintTemplateSchema,
-    goalsTemplateSchema,
+    goalTemplatesSchema,
   ],
   detached: {
     home: homeSchema,

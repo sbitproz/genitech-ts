@@ -50,7 +50,7 @@ function* update{{model}}Saga(action: PayloadAction<{{model}}>): Generator<CallE
   }
 }
 
-function* remove{{model}}Saga(action: PayloadAction<BaseEntity>): Generator<CallEffect<BaseEntity> | PutPayload<BaseEntity> | PutPayload<string>, void, {{model}}> {
+function* remove{{model}}Saga(action: PayloadAction<BaseEntity>): Generator<CallEffect | PutPayload<BaseEntity> | PutPayload<string>, void, {{model}}> {
   try {
       const {{ref}} = yield call({{refs}}API.remove, action.payload.id);
       yield put({{ref}}Removed({{ref}}.id));
