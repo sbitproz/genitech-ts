@@ -2,6 +2,7 @@ import { Config } from "@interfaces/buildBase.interface";
 import { prepareConfig } from "./buildBase";
 import { getZip, zipPackageElement } from "../commands/package.helpers";
 import { uiGenerators } from "@commands/ui.helpers";
+import { appGenerators } from "@commands/app.helpers";
 
 export const commands = (sourceConfig: Config) => {
   const zip = getZip();
@@ -9,6 +10,7 @@ export const commands = (sourceConfig: Config) => {
 
   return [
     ...uiGenerators(config),
+    ...appGenerators(config),
   ].reduce(
     (acc, command) => {
       const result = command.func(command.params.config)

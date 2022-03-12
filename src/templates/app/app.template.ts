@@ -2,14 +2,15 @@ import { Config } from "@interfaces/buildBase.interface";
 import { translate } from "builders/buildBase";
 import { Generator } from "@interfaces/template.interface";
 import { MODULE } from "@config/module.constants";
+import { appRootLocation } from "@commands/package.helpers";
 
 const generateTsLibrary = (name: string) => `nx generate @nrwl/workspace:library --name=${name} --buildable &&`
 
 const generate = (config: Config) => {
   const template = `
 import React from 'react';
-import { BrowserRouter as Router, Link, Route, Routes } from 'react-router-dom';
-import { ThemeProvider } from '@mentor-mee/core-ui'
+import { BrowserRouter as Router, Link, Route, Routes, Outlet } from 'react-router-dom';
+import { ThemeProvider } from '@{{name}}/core-ui'
 
 const APP_ROUTES = {
   LOGIN: 'login',
@@ -25,17 +26,17 @@ const Public = () => (
 
 const Home = () => <>Home</>;
 
-const PrivateRoute = ({children}: any) => <>{children}</>
+const PrivateRoute = () => <><Outlet /></>
 
-const BaseLayout = ({children}: any) => <>{children}</>
+const BaseLayout = () => <><Outlet /></>
 
-const AuthLayout = ({children}: any) => <>{children}</>
+const AuthLayout = () => <><Outlet /></>
 
 const Login = () => <>Login</>
 
-const Register = () => <>Login</>
+const Register = () => <>Register</>
 
-const Reset = () => <>Login</>
+const Reset = () => <>Reset</>
 
 export function App() {
 return (
@@ -43,14 +44,14 @@ return (
     <Router>
         <Routes>
         <Route path="/" element={<PrivateRoute />}>
-            <Route path="/" element={<BaseLayout />}>
+          <Route path="/" element={<BaseLayout />}>
             <Route path="/" element={<Home />} />
-            </Route>
+          </Route>
         </Route>
         <Route path="/" element={<AuthLayout />}>
-            <Route path={APP_ROUTES.LOGIN} element={<Login />} />
-            <Route path={APP_ROUTES.REGISTER} element={<Register />} />
-            <Route path={APP_ROUTES.RESET} element={<Reset />} />
+          <Route path={APP_ROUTES.LOGIN} element={<Login />} />
+          <Route path={APP_ROUTES.REGISTER} element={<Register />} />
+          <Route path={APP_ROUTES.RESET} element={<Reset />} />
         </Route>
         <Route path="/another" element={<Public />} />
         </Routes>
@@ -64,8 +65,8 @@ export default App;
 
   return {
     template: translate(template,config),
-    title: `CLI project builder`,
-    fileName: `workspaceCliCommands.txt`,
+    title: `App builder`,
+    fileName: `${appRootLocation(config)}app.tsx`,
   };
 };
 

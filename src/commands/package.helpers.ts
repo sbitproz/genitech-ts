@@ -1,6 +1,7 @@
 import * as fs from 'fs';
 import JSZip from "jszip";
 import { GenerateReturn } from "@interfaces/template.interface";
+import { Config } from '@interfaces/buildBase.interface';
 
 export const getZip = () => new JSZip();
 
@@ -14,3 +15,5 @@ export const zipPackageElement = (fileName: string, zip) => (element: GenerateRe
 export const moduleLibLocation = (moduleName: string) => `${moduleRootLocation(moduleName)}lib/`;
 
 export const moduleRootLocation = (moduleName: string) => `libs/${moduleName}/src/`;
+
+export const appRootLocation = (config: Config) => `apps/${config.application}/src/app/`;
