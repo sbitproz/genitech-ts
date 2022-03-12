@@ -15,12 +15,12 @@ export const uiGenerators = (config: Config) => [
   { func: generatorCore(GeneratorColors), params: { config } },
   { func: generatorCore(GeneratorThemeTypings), params: { config } },
   {
-    func: generatorOther(GeneratorLibrary, MODULE.DATA, [
-      "colors",
-      "global.styles",
-      "spacing",
-      "theme",
-      "types.d",
+    func: generatorOther(GeneratorLibrary, MODULE.UI, [
+      "theme/colors",
+      "theme/global.styles",
+      "theme/spacing",
+      "theme/theme",
+      "theme/types.d",
     ]),
     params: { config },
   },
