@@ -11,4 +11,3 @@
 6. Consider creating the following files
     - more meaty of a private area
     - auth layout file
-    - gitignore file (*.zip, *.txt)
