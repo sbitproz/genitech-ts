@@ -5,3 +5,12 @@
 2. Consider developing a firebase data layer
 # 3. Consider a way to bleed through queries
 4. Study domain driven development
+
+
+5. Consider a form generator react-hook-form
+6. Consider creating the following files
+    - routes file
+    - more meaty of a private area
+    - base layout file
+    - auth layout file
+    - gitignore file (*.zip, *.txt)
