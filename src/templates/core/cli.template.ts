@@ -25,7 +25,11 @@ const generate = (config: Config) => {
 
     nx g @nrwl/react:library --name=${MODULE.UI} --buildable &&
 
-    yarn add @mui/material@^5.4.0 @mui/icons-material@^5.3.1 @mui/styled-engine-sc @emotion/react@^11.7.1 @emotion/styled@^11.6.0 polished@^4.1.4 react-router-dom@^6.2.1 && 
+    yarn add @mui/material@^5.4.0 @mui/icons-material@^5.3.1 @mui/styled-engine-sc @emotion/react@^11.7.1 @emotion/styled@^11.6.0 polished@^4.1.4 && 
+
+    yarn add react-router-dom@^6.2.1 &&
+
+    yarn add @types/node &&
 
     yarn add axios &&
 

@@ -1,7 +1,6 @@
 import { Config } from "@interfaces/buildBase.interface";
 import { translate } from "builders/buildBase";
 import { Generator } from "@interfaces/template.interface";
-import { MODULE } from "@config/module.constants";
 import { appRootLocation } from "@commands/package.helpers";
 
 const generateTsLibrary = (name: string) => `nx generate @nrwl/workspace:library --name=${name} --buildable &&`
@@ -10,13 +9,9 @@ const generate = (config: Config) => {
   const template = `
 import React from 'react';
 import { BrowserRouter as Router, Link, Route, Routes, Outlet } from 'react-router-dom';
+import { APP_ROUTES } from './routes';
+import BaseLayout from './layout/BaseLayout/BaseLayout';
 import { ThemeProvider } from '@{{name}}/core-ui'
-
-const APP_ROUTES = {
-  LOGIN: 'login',
-  REGISTER: 'register',
-  RESET: 'reset'
-}
 
 const Public = () => (
   <div>
@@ -27,8 +22,6 @@ const Public = () => (
 const Home = () => <>Home</>;
 
 const PrivateRoute = () => <><Outlet /></>
-
-const BaseLayout = () => <><Outlet /></>
 
 const AuthLayout = () => <><Outlet /></>
 
