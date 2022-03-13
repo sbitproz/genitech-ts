@@ -29,8 +29,6 @@ const generate = (config: Config) => {
 
     yarn add react-router-dom@^6.2.1 &&
 
-    yarn add react-hook-form &&
-
     yarn add axios &&
 
     {{#if this.reduxObservable}}
