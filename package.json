@@ -11,9 +11,9 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "ts-node -r tsconfig-paths/register ./src/app.ts",
-    "events": "ts-node -r tsconfig-paths/register ./src/events.ts",
-    "ui": "ts-node -r tsconfig-paths/register ./src/ui.ts",
+    "app:entities": "ts-node -r tsconfig-paths/register ./src/appEntities.ts",
+    "app:events": "ts-node -r tsconfig-paths/register ./src/appEvents.ts",
+    "app:UI": "ts-node -r tsconfig-paths/register ./src/appUI.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],

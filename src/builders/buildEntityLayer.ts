@@ -4,7 +4,6 @@ import { reduxGenerators } from '../commands/redux.helpers';
 import { workspaceGenerators } from "../commands/workspace.helpers";
 import { getZip, zipPackageElement } from "../commands/package.helpers";
 import { dataGenerators } from "../commands/data.helpers";
-import { mockGenerators } from "../commands/mock.helpers";
 import { typeGenerators } from "../commands/type.helpers";
 
 export const commands = (sourceConfig: Config) => {
@@ -15,7 +14,6 @@ export const commands = (sourceConfig: Config) => {
     ...reduxGenerators(config),
     ...workspaceGenerators(config),
     ...dataGenerators(config),
-    ...mockGenerators(config),
     ...typeGenerators(config),
   ].reduce(
     (acc, command) => {
