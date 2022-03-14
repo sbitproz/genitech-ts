@@ -21,7 +21,7 @@ const generate = (config: Config) => {
     ${generateTsLibrary(MODULE.STATE)}
     ${generateTsLibrary(MODULE.INTERFACE)}
     ${generateTsLibrary(MODULE.DATA)}
-    ${generateTsLibrary(MODULE.LOGIN)}
+    ${generateTsLibrary(MODULE.AUTH)}
 
     nx g @nrwl/react:library --name=${MODULE.UI} --buildable &&
 

@@ -5,6 +5,6 @@ export const MODULE = {
   MOCK: "mock",
   STATE: "core-state",
   MATERIAL: "material",
-  LOGIN: "ui-login",
+  AUTH: "ui-login",
 };
 

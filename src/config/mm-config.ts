@@ -229,7 +229,7 @@ export const config: Config = {
     MODULE.STATE,
     MODULE.INTERFACE,
     MODULE.MATERIAL,
-    MODULE.LOGIN,
+    MODULE.AUTH,
   ],
   entities: [
     userSchema,

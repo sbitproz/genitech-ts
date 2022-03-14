@@ -3,6 +3,7 @@ import { prepareConfig } from "./buildBase";
 import { getZip, zipPackageElement } from "../commands/package.helpers";
 import { uiGenerators } from "@commands/ui.helpers";
 import { appGenerators } from "@commands/app.helpers";
+import { authGenerators } from "@commands/auth.helpers";
 
 export const commands = (sourceConfig: Config) => {
   const zip = getZip();
@@ -11,6 +12,7 @@ export const commands = (sourceConfig: Config) => {
   return [
     ...uiGenerators(config),
     ...appGenerators(config),
+    ...authGenerators(config)
   ].reduce(
     (acc, command) => {
       const result = command.func(command.params.config)
