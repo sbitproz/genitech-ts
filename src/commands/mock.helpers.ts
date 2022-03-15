@@ -16,7 +16,8 @@ const generateFieldValue = (type: FieldTypes) => ({
   title: `"${faker.name.title()}"`,
   email: `"${faker.internet.email()}"`,
   fullname: `"${faker.name.firstName()} ${faker.name.lastName()}"`,
-  lorem: `"${faker.lorem.sentence()}"`
+  lorem: `"${faker.lorem.sentence()}"`,
+  password: `"${faker.internet.password()}"`
 })[type];
 
 const addCommaSeparator = addSeparator(",", "");
@@ -36,12 +37,35 @@ export const mockGeneratorEntity =
       .join(",")}}`,
   });
 
+let bank: {[key: string]: string | number []} = {};
+
+const extractFromBank = (fieldname: string) => {
+  if (!bank[fieldname]) return;
+
+  const random = Math.random() * 
+  bank[fieldname].
+}
+
 const MockGenerator = {
   generate: (_, entity: Schema) =>
     Array(30).fill("")
       .map(() => {
         return `{${(entity.fields || []).map(
-          ({ fieldname: name, type }, idx) => `"${name}": ${generateFieldValue(type) || UNSET}`
+          ({ fieldname: name, type }, idx) => {
+
+          const generateValue = generateFieldValue(type);
+          const entityKey = `${entity.model}Id`;
+
+          if (name  === 'id'){
+            // bank that generated id
+            bank = {
+              ...bank,
+              [entityKey]: [...bank[entityKey], generateValue]
+            }
+          }
+
+          return `"${name}": ${generateValue || UNSET}`
+        }
         ).join(',')}}`;
       }),
 };
