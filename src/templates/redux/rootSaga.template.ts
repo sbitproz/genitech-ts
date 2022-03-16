@@ -10,13 +10,19 @@ import { all, fork } from 'redux-saga/effects';
 {{#each entities}}
 import {{model}}Saga from './{{model}}/{{model}}.saga';
 {{/each}}      
+{{#each events}}
+import {{model}}EventsSaga from './events/{{model}}/{{model}}.saga';
+{{/each}}
 
 
 export function* rootSaga(){
   yield all([
     {{#each entities}}
     fork({{model}}Saga),
-    {{/each}}      
+    {{/each}}
+    {{#each events}}
+    fork({{model}}EventsSaga),
+    {{/each}}
   ]);
 }  
 `

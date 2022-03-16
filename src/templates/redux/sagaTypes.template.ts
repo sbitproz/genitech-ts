@@ -6,6 +6,7 @@ import { moduleLibLocation } from "commands/package.helpers";
 
 const generate = (config: Config) => {
   const template = `
+import { PayloadAction } from '@reduxjs/toolkit';
 import { PutEffect } from 'redux-saga/effects';
 
 export type PutPayload<T> = PutEffect<PayloadAction<T>>;

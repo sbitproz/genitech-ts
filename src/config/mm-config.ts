@@ -10,6 +10,22 @@ const events: Schema[] = [
     model: "uploadProfilePicture",
     modelPlural: "uploadProfilePictures",
   },
+  {
+    model: "userLogin",
+    modelPlural: "userLogin",
+  },
+  {
+    model: "userLogout",
+    modelPlural: "userLogout",
+  },
+  {
+    model: "userResetPassword",
+    modelPlural: "userResetPassword",
+  },
+  {
+    model: "userRegister",
+    modelPlural: "userRegister",
+  },
 ];
 
 const goalsSchema: Schema = {
@@ -143,10 +159,6 @@ export const userSchema: Schema = {
     {
       fieldname: "email",
       type: "email",
-    },
-    {
-      fieldname: "password",
-      type: "password",
     },
     {
       fieldname: "lastLogin",

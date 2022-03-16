@@ -32,7 +32,7 @@ function* fetch{{model}}Saga(action: PayloadAction<BaseEntity>): Generator<CallE
   }
 }
 
-function* list{{models}}Saga(): Generator<CallEffect | PutPayload<{{model}}[]> | PutPayload<string>, void, {{model}}[]> {
+function* list{{models}}Saga(): Generator<CallEffect | PutPayload<any> | PutPayload<string>, void, {{model}}[]> {
   try {
       const {{refs}} = yield call({{refs}}API.load);
       yield put({{refs}}Listed({{refs}}));
@@ -41,7 +41,7 @@ function* list{{models}}Saga(): Generator<CallEffect | PutPayload<{{model}}[]> |
   }
 }
 
-function* update{{model}}Saga(action: PayloadAction<{{model}}>): Generator<CallEffect<{{model}}> | PutPayload<{{model}}> | PutPayload<string>, void, {{model}}> { 
+function* update{{model}}Saga(action: PayloadAction<{{model}}>): Generator<CallEffect<{{model}}> | PutPayload<any> | PutPayload<string>, void, {{model}}> { 
   try {
       const {{ref}} = yield call({{refs}}API.update, action.payload);
       yield put({{ref}}Updated({id: {{ref}}.id, changes: {{ref}} }));
@@ -50,7 +50,7 @@ function* update{{model}}Saga(action: PayloadAction<{{model}}>): Generator<CallE
   }
 }
 
-function* remove{{model}}Saga(action: PayloadAction<BaseEntity>): Generator<CallEffect | PutPayload<BaseEntity> | PutPayload<string>, void, {{model}}> {
+function* remove{{model}}Saga(action: PayloadAction<BaseEntity>): Generator<CallEffect | PutPayload<any> | PutPayload<string>, void, {{model}}> {
   try {
       const {{ref}} = yield call({{refs}}API.remove, action.payload.id);
       yield put({{ref}}Removed({{ref}}.id));
@@ -60,7 +60,7 @@ function* remove{{model}}Saga(action: PayloadAction<BaseEntity>): Generator<Call
 }
 
 {{#each fkFields}}
-function* listBy{{model}}Saga(action: PayloadAction<{ {{ref}}: {{calculateTypes type}} }>): Generator<CallEffect | PutPayload<{{@root.model}}[]> | PutPayload<string>, void, {{@root.model}}[]> {
+function* listBy{{model}}Saga(action: PayloadAction<{ {{ref}}: {{calculateTypes type}} }>): Generator<CallEffect | PutPayload<any> | PutPayload<string>, void, {{@root.model}}[]> {
   try {
       const {{@root.ref}} = yield call({{@root.refs}}API.loadBy, '{{fieldname}}', action.payload.{{fieldname}});
       yield put({{@root.ref}}By{{model}}Listed({{@root.ref}}));

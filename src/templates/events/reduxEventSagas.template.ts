@@ -7,9 +7,10 @@ import { GeneratorEntity } from "@interfaces/template.interface";
 const generate = (config: Config, event: Schema) => {
   const template = `
 import { call, put, takeLatest } from 'redux-saga/effects'
-import { {{ref}}Error, {{ref}}Start, {{ref}}Success } from './{{ref}}.actions';
+import { PayloadAction } from '@reduxjs/toolkit';
+import { {{ref}}Error, {{ref}}Start, {{ref}}Success, {{model}}Start } from './{{ref}}.actions';
 
-function* {{ref}}Saga(action: any): Generator<any,any> {
+function* {{ref}}Saga(action: PayloadAction<{{model}}Start>): Generator<any,any> {
   try {
       // put your business logic here
       // yield call(someAPI, action.payload.someParam);

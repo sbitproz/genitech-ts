@@ -8,11 +8,15 @@ const generate = (config: Config, event: Schema) => {
   const template = `
 import { createAction } from '@reduxjs/toolkit';
 
-export const {{ref}}Start = createAction<any>('{{refs}}/{{ref}}Start');
+export interface {{model}}Start { }
 
-export const {{ref}}Error = createAction<any>('{{refs}}/{{ref}}Error');
+export const {{ref}}Start = createAction<{{model}}>('{{refs}}/{{ref}}Start');
 
-export const {{ref}}Success = createAction<any>('{{refs}}/{{ref}}Success');
+export const {{ref}}Error = createAction<string>('{{refs}}/{{ref}}Error');
+
+export interface {{model}}Success { }
+
+export const {{ref}}Success = createAction<{{model}}Success>('{{refs}}/{{ref}}Success');
 `
   return {
     template: translate(template,config, event),

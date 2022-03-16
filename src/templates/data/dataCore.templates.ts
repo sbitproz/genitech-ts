@@ -18,13 +18,13 @@ export interface BaseEntity {
   id: string;
 }
 
-const api = axios.create({
+export const api = axios.create({
   baseURL: BASE_URL.dev,
   timeout: 1000,
   headers: {'X-Custom-Header': 'foobar'}
 });
 
-const unwrapData = (response: AxiosResponse) => response.data
+export const unwrapData = (response: AxiosResponse) => response.data
 
 const load = <T>(getUrl: () => string) => () => api.get<T>(\`\${getUrl()}\`).then(unwrapData) as Promise<T[]>
 
