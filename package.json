@@ -13,6 +13,7 @@
   "scripts": {
     "app:entities": "ts-node -r tsconfig-paths/register ./src/appEntities.ts",
     "app:events": "ts-node -r tsconfig-paths/register ./src/appEvents.ts",
+    "app:mocks": "ts-node -r tsconfig-paths/register ./src/appMocks.ts",
     "app:UI": "ts-node -r tsconfig-paths/register ./src/appUI.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

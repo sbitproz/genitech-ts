@@ -144,6 +144,26 @@ const sprintTemplateSchema: Schema = {
   ],
 };
 
+export const currentUserSchema: Schema = {
+  model: "user",
+  modelPlural: "users",
+  disableData: true,
+  fields: [
+    {
+      fieldname: "name",
+      type: "fullname",
+    },
+    {
+      fieldname: "email",
+      type: "email",
+    },
+    {
+      fieldname: "lastLogin",
+      type: "date",
+    },
+  ],
+};
+
 export const userSchema: Schema = {
   model: "user",
   modelPlural: "users",

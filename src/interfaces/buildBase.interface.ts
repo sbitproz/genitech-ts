@@ -36,6 +36,7 @@ export const DateTimeTypes: string[] = [TypeOptions.date, TypeOptions.dateTime];
 export interface Schema {
   model: string;
   modelPlural: string;
+  disableData?: boolean;
   single?: boolean;
   variations?: NameVariations;
   pkField?: Field;

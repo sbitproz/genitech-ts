@@ -4,7 +4,6 @@ import { getZip, zipPackageElement } from "../commands/package.helpers";
 import { uiGenerators } from "@commands/ui.helpers";
 import { appGenerators } from "@commands/app.helpers";
 import { authGenerators } from "@commands/auth.helpers";
-import { mockGenerators } from "@commands/mock.helpers";
 
 export const commands = (sourceConfig: Config) => {
   const zip = getZip();
@@ -13,7 +12,6 @@ export const commands = (sourceConfig: Config) => {
   return [
     ...uiGenerators(config),
     ...appGenerators(config),
-    ...mockGenerators(config),
     ...authGenerators(config)
   ].reduce(
     (acc, command) => {
