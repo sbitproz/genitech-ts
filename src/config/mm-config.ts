@@ -259,7 +259,7 @@ export const config: Config = {
     MODULE.MATERIAL,
     MODULE.AUTH,
   ],
-  entities: [
+  dataEntities: [
     userSchema,
     mentorSchema,
     menteeSchema,

@@ -32,7 +32,7 @@ const reduceEntitiesLocations = (entities: Schema[], extensions: string[]) => en
 
 const reduxEntityFiles = (config: Config) =>
   [
-    ...reduceEntitiesLocations(config.entities, extensions(config)),
+    ...reduceEntitiesLocations(config.dataEntities, extensions(config)),
     ...reduceEntitiesLocations(config.simpleEntities, ['reducer']),
     ...["store", 'events']
   ];

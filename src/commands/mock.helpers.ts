@@ -34,7 +34,7 @@ export const mockGeneratorEntity =
   (Generator: GeneratorEntity) => (config: Config) => ({
     title: "Mock Data",
     fileName: `${MODULE.MOCK}/${config.name}-mock.json`,
-    template: `{ ${config.entities
+    template: `{ ${config.dataEntities
       .filter(filterEntityWithFields)
       .map(createEntityArrayOfRecords(Generator, config))
       .join(",")}}`,

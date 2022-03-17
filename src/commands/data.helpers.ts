@@ -5,7 +5,7 @@ import GeneratorCore from "@templates/data/dataCore.templates";
 import { generatorCore, generatorOther, generatorEntity } from "builders/generatorRunner";
 import { MODULE } from "@config/module.constants";
 
-const dataEntityFiles = (config: Config) => config.entities.map(entity => `${entity.variations.ref}.service`).concat('data.conf')
+const dataEntityFiles = (config: Config) => config.dataEntities.map(entity => `${entity.variations.ref}.service`).concat('data.conf')
 
 export const dataGenerators = (config: Config) => [
     { func: generatorCore(GeneratorCore), params: { config } },

@@ -11,10 +11,10 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "app:entities": "ts-node -r tsconfig-paths/register ./src/appEntities.ts",
-    "app:events": "ts-node -r tsconfig-paths/register ./src/appEvents.ts",
-    "app:mocks": "ts-node -r tsconfig-paths/register ./src/appMocks.ts",
-    "app:UI": "ts-node -r tsconfig-paths/register ./src/appUI.ts",
+    "entities": "ts-node -r tsconfig-paths/register ./src/appEntities.ts",
+    "events": "ts-node -r tsconfig-paths/register ./src/appEvents.ts",
+    "mocks": "ts-node -r tsconfig-paths/register ./src/appMocks.ts",
+    "ui": "ts-node -r tsconfig-paths/register ./src/appUI.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],

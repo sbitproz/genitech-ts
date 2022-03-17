@@ -77,7 +77,7 @@ export interface Config {
   packages?: string[];
   dependencies?: string[];
   libs?: string[];
-  entities?: Schema[];
+  dataEntities?: Schema[];
   simpleEntities?: Schema[];
   events?: Schema[];
   detached?: {

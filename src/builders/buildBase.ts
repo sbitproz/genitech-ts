@@ -82,18 +82,18 @@ export const fieldNameVariation = (fields: Field[]) =>
     ...buildFieldBase(field),
   }));
 
-const prepareEntities = (entities: Schema[]) => [
-  ...entities.map((entity) => ({
+const prepareEntities = (dataEntities: Schema[]) => [
+  ...dataEntities.map((entity) => ({
     ...entity,
     variations: buildNameVariation(entity),
     fields: fieldNameVariation(entity.fields),
   })),
 ]
 
-export const prepareConfig = ({ entities, events, simpleEntities, ...config }: Config) => ({
+export const prepareConfig = ({ dataEntities, events, simpleEntities, ...config }: Config) => ({
   ...config,
-  entities: [
-    ...entities.map((entity) => ({
+  dataEntities: [
+    ...dataEntities.map((entity) => ({
       ...entity,
       variations: buildNameVariation(entity),
       fields: [entity.pkField, ...entity.fields, ...(entity.fkFields ?? [])],
