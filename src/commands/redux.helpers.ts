@@ -6,7 +6,7 @@ import GeneratorRootSaga from "@templates/redux/rootSaga.template";
 import GeneratorSagaTypes from "@templates/redux/sagaTypes.template";
 import GeneratorSelector from "@templates/redux/selector.template";
 import GeneratorLibrary from "@templates/core/libraryExport.templates";
-import GeneratorCore from "@templates/redux/redux.template";
+import GeneratorCore from "@templates/redux/rootRedux.template";
 import {
   generatorCore,
   generatorOther,
@@ -33,7 +33,7 @@ const reduceEntitiesLocations = (entities: Schema[], extensions: string[]) => en
 const reduxEntityFiles = (config: Config) =>
   [
     ...reduceEntitiesLocations(config.dataEntities, extensions(config)),
-    ...reduceEntitiesLocations(config.stateEntities, ['reducer']),
+    ...reduceEntitiesLocations(config.stateEntities, ['reducer', 'selectors']),
     ...["store", 'events']
   ];
 

@@ -14,6 +14,10 @@ export const events: Schema[] = [
     modelPlural: "userLogin",
   },
   {
+    model: "fetchUserByEmail",
+    modelPlural: "fetchUserByEmail",
+  },
+  {
     model: "userLogout",
     modelPlural: "userLogout",
   },

@@ -12,7 +12,7 @@ import { RootState } from '../store';
 export const select{{model}} = (state: RootState) => state.{{ref}}
 
 {{#each fields}}
-export const select{{this.model}} = createSelector(
+export const select{{@root.model}}{{this.model}} = createSelector(
   select{{@root.model}},
   ({ {{this.ref}} }) => {{this.ref}}
 )

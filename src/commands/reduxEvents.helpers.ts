@@ -1,9 +1,10 @@
 import GeneratorLibrary from "@templates/core/libraryExport.templates";
-import { generatorOther, generatorEvents } from "builders/generatorRunner";
+import { generatorOther, generatorEvents, generatorEntity } from "builders/generatorRunner";
 import { Config } from "@interfaces/buildBase.interface";
 import { MODULE } from "@config/module.constants";
 import EventSagaGenerator from "@templates/events/reduxEventSagas.template";
 import EventActionsGenerator from "@templates/events/reduxEventActions.template";
+import GeneratorRootSaga from "@templates/redux/rootSaga.template";
 
 // Generate Saga + Action for each event,
 // Create and index file export under the events folder
@@ -20,6 +21,14 @@ const reduxEntityFiles = (config: Config) =>
     },
     []
   );
+
+const rootSagas = (config: Config) =>
+  config.reduxSaga
+    ? [
+        { func: generatorEntity(GeneratorRootSaga), params: { config } },
+      ]
+    : [];
+
 
 const sagaObservable = (config: Config) =>
     config.reduxSaga
@@ -42,4 +51,5 @@ export const reduxEventsGenerators = (config: Config) => [
     params: { config },
   },
   ...sagaObservable(config),
+  ...rootSagas(config)
 ];

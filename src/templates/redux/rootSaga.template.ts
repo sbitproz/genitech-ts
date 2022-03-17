@@ -33,8 +33,8 @@ export function* rootSaga(){
   };
 };
 
-const Sagaenerator: Generator = {
+const GeneratorRootSaga: Generator = {
   generate,
 };
 
-export default Sagaenerator;
+export default GeneratorRootSaga;

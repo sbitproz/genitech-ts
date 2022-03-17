@@ -10,7 +10,7 @@ import { createAction } from '@reduxjs/toolkit';
 
 export interface {{model}}Start { }
 
-export const {{ref}}Start = createAction<{{model}}>('{{refs}}/{{ref}}Start');
+export const {{ref}}Start = createAction<{{model}}Start>('{{refs}}/{{ref}}Start');
 
 export const {{ref}}Error = createAction<string>('{{refs}}/{{ref}}Error');
 
