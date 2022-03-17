@@ -5,6 +5,8 @@ export const generatorIterator = (Generator: GeneratorEntity, key: string) => (c
 
 export const generatorEntity = (Generator: GeneratorEntity) => generatorIterator(Generator, 'entities');
 
+export const generatorSimpleEntity = (Generator: GeneratorEntity) => generatorIterator(Generator, 'simpleEntities');
+
 export const generatorEvents = (Generator: GeneratorEntity) => generatorIterator(Generator, 'events');
 
 export const generatorCore = (Generator: GeneratorCore) => (config: Config) => Generator.generate(config);

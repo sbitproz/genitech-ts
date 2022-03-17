@@ -11,22 +11,31 @@ import {
   generatorCore,
   generatorOther,
   generatorEntity,
+  generatorSimpleEntity,
 } from "builders/generatorRunner";
-import { Config } from "@interfaces/buildBase.interface";
+import { Config, Schema } from "@interfaces/buildBase.interface";
 import { MODULE } from "@config/module.constants";
+import GeneratorReducer from "@templates/redux/reducerEntity.template";
+import GeneratorSimpleSelector from "@templates/redux/simpleSelector.template";
 
 const extensions = (config: Config) => ["slice", "selectors"]
   .concat(config.reduxObservable ? ["epics"] : [])
   .concat(config.reduxSaga ? ["saga"] : [])
 
+const reduceEntitiesLocations = (entities: Schema[], extensions: string[]) => entities.reduce(
+  (files, entity) => {
+    const { ref } = entity.variations;
+    return [...files, ...extensions.map((ext) => `${ref}/${ref}.${ext}`)];
+  },
+  []
+)
+
 const reduxEntityFiles = (config: Config) =>
-  config.entities.reduce(
-    (files, entity) => {
-      const { ref } = entity.variations;
-      return [...files, ...extensions(config).map((ext) => `${ref}/${ref}.${ext}`)];
-    },
-    ["store", 'events']
-  );
+  [
+    ...reduceEntitiesLocations(config.entities, extensions(config)),
+    ...reduceEntitiesLocations(config.simpleEntities, ['reducer']),
+    ...["store", 'events']
+  ];
 
 const reduxObservable = (config: Config) =>
   config.reduxObservable
@@ -49,6 +58,8 @@ export const reduxGenerators = (config: Config) => [
   { func: generatorCore(GeneratorCore), params: { config } },
   { func: generatorEntity(GeneratorSlice), params: { config } },
   { func: generatorEntity(GeneratorSelector), params: { config } },
+  { func: generatorSimpleEntity(GeneratorReducer), params: { config } },
+  { func: generatorSimpleEntity(GeneratorSimpleSelector), params: { config } },
   {
     func: generatorOther(
       GeneratorLibrary,

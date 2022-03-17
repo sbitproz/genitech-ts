@@ -15,6 +15,9 @@ ${sagaSnippets.import}
 {{#each entities}}
 import {{this.variations.refs}}Reducer from './{{this.variations.ref}}/{{this.variations.ref}}.slice';
 {{/each}}
+{{#each simpleEntities}}
+import {{this.variations.ref}}Reducer from './{{this.variations.ref}}/{{this.variations.ref}}.reducer';
+{{/each}}
 
 ${sagaSnippets.configure}
 
@@ -22,6 +25,9 @@ export const store = configureStore({
   reducer: {
     {{#each entities}}
       {{this.variations.refs}}: {{this.variations.refs}}Reducer,
+    {{/each}}
+    {{#each simpleEntities}}
+      {{this.variations.ref}}: {{this.variations.ref}}Reducer,
     {{/each}}
   },
   middleware:  (getDefaultMiddleware) => getDefaultMiddleware({

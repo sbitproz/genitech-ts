@@ -14,5 +14,5 @@ export const commands = (sourceConfig: Config) => {
       const result = command.func(command.params.config)
       return Array.isArray(result) ? [...acc, ...result] : [...acc, result]
     }, []
-  ).forEach(zipPackageElement(`${config.name}-events`, zip))
+  ).forEach(zipPackageElement(`${config.name}-mocks`, zip))
 }

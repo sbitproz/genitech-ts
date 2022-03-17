@@ -8,24 +8,15 @@ const generate = (config: Config, entity: Schema) => {
   const template = `
 import { createSelector } from '@reduxjs/toolkit';
 import { RootState } from '../store';
-import { {{ref}}SliceAdapter, {{model}}Slice, {{constants}}_SLICE_FEATURE_KEY } from './{{ref}}.slice';
 
-const { selectAll, selectEntities, selectById: select{{model}}ById, selectIds: select{{model}}ByIds } = {{ref}}SliceAdapter.getSelectors();
+export const select{{model}} = (state: RootState) => state.{{ref}}
 
-export { select{{model}}ById, select{{model}}ByIds };
-
-export const get{{models}}Slice = (rootState: RootState): {{model}}Slice =>
-  rootState[{{constants}}_SLICE_FEATURE_KEY];
-
-export const selectAll{{models}}Slice = createSelector(
-  get{{models}}Slice,
-  selectAll
-);
-
-export const select{{model}}Entities = createSelector(
-  get{{models}}Slice,
-  selectEntities
-);
+{{#each fields}}
+export const select{{this.model}} = createSelector(
+  selectLayout,
+  ({ {{this.ref}} }) => {{this.ref}}
+)
+{{/each}}
 `
   return {
     template: translate(template, config, entity),
@@ -34,8 +25,8 @@ export const select{{model}}Entities = createSelector(
   };
 };
 
-const Generator: GeneratorEntity = {
+const GeneratorSimpleSelector: GeneratorEntity = {
   generate,
 };
 
-export default Generator;
+export default GeneratorSimpleSelector;

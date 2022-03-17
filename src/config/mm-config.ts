@@ -144,22 +144,18 @@ const sprintTemplateSchema: Schema = {
   ],
 };
 
-export const currentUserSchema: Schema = {
-  model: "user",
-  modelPlural: "users",
+export const layoutSchema: Schema = {
+  model: "layout",
+  modelPlural: "layouts",
   disableData: true,
   fields: [
     {
-      fieldname: "name",
-      type: "fullname",
+      fieldname: "expandLeftSidebar",
+      type: "boolean",
     },
     {
-      fieldname: "email",
-      type: "email",
-    },
-    {
-      fieldname: "lastLogin",
-      type: "date",
+      fieldname: "expandRightSidebar",
+      type: "boolean",
     },
   ],
 };
@@ -271,6 +267,9 @@ export const config: Config = {
     goalsSchema,
     sprintTemplateSchema,
     goalTemplatesSchema,
+  ],
+  simpleEntities: [
+    layoutSchema
   ],
   detached: {
     home: homeSchema,

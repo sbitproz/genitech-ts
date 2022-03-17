@@ -78,6 +78,7 @@ export interface Config {
   dependencies?: string[];
   libs?: string[];
   entities?: Schema[];
+  simpleEntities?: Schema[];
   events?: Schema[];
   detached?: {
     [key: string]: Schema;
