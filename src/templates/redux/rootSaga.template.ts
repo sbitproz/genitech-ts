@@ -7,7 +7,7 @@ import { moduleLibLocation } from "commands/package.helpers";
 const generate = (config: Config) => {
   const template = `
 import { all, fork } from 'redux-saga/effects';
-{{#each entities}}
+{{#each dataEntities}}
 import {{model}}Saga from './{{model}}/{{model}}.saga';
 {{/each}}      
 {{#each events}}
@@ -17,7 +17,7 @@ import {{model}}EventsSaga from './events/{{model}}/{{model}}.saga';
 
 export function* rootSaga(){
   yield all([
-    {{#each entities}}
+    {{#each dataEntities}}
     fork({{model}}Saga),
     {{/each}}
     {{#each events}}

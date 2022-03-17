@@ -13,7 +13,7 @@ export const select{{model}} = (state: RootState) => state.{{ref}}
 
 {{#each fields}}
 export const select{{this.model}} = createSelector(
-  selectLayout,
+  select{{@root.model}},
   ({ {{this.ref}} }) => {{this.ref}}
 )
 {{/each}}

@@ -12,10 +12,10 @@ const generate = (config: Config) => {
 import { configureStore } from '@reduxjs/toolkit'
 ${observableSnippets.import}
 ${sagaSnippets.import}
-{{#each entities}}
+{{#each dataEntities}}
 import {{this.variations.refs}}Reducer from './{{this.variations.ref}}/{{this.variations.ref}}.slice';
 {{/each}}
-{{#each simpleEntities}}
+{{#each stateEntities}}
 import {{this.variations.ref}}Reducer from './{{this.variations.ref}}/{{this.variations.ref}}.reducer';
 {{/each}}
 
@@ -23,10 +23,10 @@ ${sagaSnippets.configure}
 
 export const store = configureStore({
   reducer: {
-    {{#each entities}}
+    {{#each dataEntities}}
       {{this.variations.refs}}: {{this.variations.refs}}Reducer,
     {{/each}}
-    {{#each simpleEntities}}
+    {{#each stateEntities}}
       {{this.variations.ref}}: {{this.variations.ref}}Reducer,
     {{/each}}
   },

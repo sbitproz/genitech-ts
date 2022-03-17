@@ -12,7 +12,7 @@ import {
   createReducer,
 } from '@reduxjs/toolkit'
 
-export const set{{model}} = createAction<Partial<{{model}}>>('{{refs}}/add{{model}}')
+export const set{{model}} = createAction<Partial<{{model}}>>('{{refs}}/set{{model}}')
 
 export const {{constants}}_FEATURE_KEY = '{{refs}}';
 

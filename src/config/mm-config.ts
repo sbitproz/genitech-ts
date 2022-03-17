@@ -1,243 +1,19 @@
-import { Config, Schema } from "@interfaces/buildBase.interface";
+import { Config } from "@interfaces/buildBase.interface";
 import { MODULE } from "./module.constants";
-
-const events: Schema[] = [
-  {
-    model: "uploadResource",
-    modelPlural: "uploadResources",
-  },
-  {
-    model: "uploadProfilePicture",
-    modelPlural: "uploadProfilePictures",
-  },
-  {
-    model: "userLogin",
-    modelPlural: "userLogin",
-  },
-  {
-    model: "userLogout",
-    modelPlural: "userLogout",
-  },
-  {
-    model: "userResetPassword",
-    modelPlural: "userResetPassword",
-  },
-  {
-    model: "userRegister",
-    modelPlural: "userRegister",
-  },
-];
-
-const goalsSchema: Schema = {
-  model: "goal",
-  modelPlural: "goals",
-  pkField: {
-    fieldname: "id",
-    type: "uuid",
-  },
-  fields: [
-    {
-      fieldname: "title",
-      type: "lorem",
-    },
-    {
-      fieldname: "profileDescription",
-      type: "lorem",
-    },
-  ],
-  fkFields: [
-    {
-      fieldname: "sprintId",
-      type: "uuid",
-    },
-  ],
-};
-
-const sprintSchema: Schema = {
-  model: "sprint",
-  modelPlural: "sprints",
-  pkField: {
-    fieldname: "id",
-    type: "uuid",
-  },
-  fields: [
-    {
-      fieldname: "title",
-      type: "lorem",
-    },
-    {
-      fieldname: "profileDescription",
-      type: "lorem",
-    },
-  ],
-  fkFields: [
-    {
-      fieldname: "mentorId",
-      type: "uuid",
-    },
-    {
-      fieldname: "sprintTemplateId",
-      type: "uuid",
-    },
-    {
-      fieldname: "menteeId",
-      type: "uuid",
-    },
-  ],
-};
-
-const goalTemplatesSchema: Schema = {
-  model: "goalTemplate",
-  modelPlural: "goalTemplates",
-  pkField: {
-    fieldname: "id",
-    type: "uuid",
-  },
-  fields: [
-    {
-      fieldname: "title",
-      type: "lorem",
-    },
-    {
-      fieldname: "profileDescription",
-      type: "lorem",
-    },
-  ],
-  fkFields: [
-    {
-      fieldname: "mentorId",
-      type: "uuid",
-    },
-    {
-      fieldname: "sprintTemplateId",
-      type: "uuid",
-    },
-    {
-      fieldname: "menteeId",
-      type: "uuid",
-    },
-  ],
-};
-
-const sprintTemplateSchema: Schema = {
-  model: "sprintTemplate",
-  modelPlural: "sprintTemplates",
-  pkField: {
-    fieldname: "id",
-    type: "uuid",
-  },
-  fields: [
-    {
-      fieldname: "title",
-      type: "lorem",
-    },
-    {
-      fieldname: "profileDescription",
-      type: "lorem",
-    },
-  ],
-  fkFields: [
-    {
-      fieldname: "mentorId",
-      type: "uuid",
-    },
-  ],
-};
-
-export const layoutSchema: Schema = {
-  model: "layout",
-  modelPlural: "layouts",
-  disableData: true,
-  fields: [
-    {
-      fieldname: "expandLeftSidebar",
-      type: "boolean",
-    },
-    {
-      fieldname: "expandRightSidebar",
-      type: "boolean",
-    },
-  ],
-};
-
-export const userSchema: Schema = {
-  model: "user",
-  modelPlural: "users",
-  pkField: {
-    fieldname: "id",
-    type: "uuid",
-  },
-  fields: [
-    {
-      fieldname: "name",
-      type: "fullname",
-    },
-    {
-      fieldname: "email",
-      type: "email",
-    },
-    {
-      fieldname: "lastLogin",
-      type: "date",
-    },
-  ],
-};
-
-export const mentorSchema: Schema = {
-  model: "mentor",
-  modelPlural: "mentors",
-  pkField: {
-    fieldname: "id",
-    type: "uuid",
-  },
-  fields: [
-    {
-      fieldname: "slug",
-      type: "lorem",
-    },
-    {
-      fieldname: "profileIntro",
-      type: "lorem",
-    },
-    {
-      fieldname: "profileDescription",
-      type: "lorem",
-    },
-  ],
-};
-
-export const menteeSchema: Schema = {
-  model: "mentee",
-  modelPlural: "mentees",
-  pkField: {
-    fieldname: "id",
-    type: "uuid",
-  },
-  fields: [
-    {
-      fieldname: "slug",
-      type: "lorem",
-    },
-    {
-      fieldname: "profileIntro",
-      type: "lorem",
-    },
-    {
-      fieldname: "profileDescription",
-      type: "lorem",
-    },
-  ],
-};
-
-const homeSchema: Schema = {
-  model: "home",
-  modelPlural: "home",
-};
-
-const loginSchema: Schema = {
-  model: "login",
-  modelPlural: "login",
-};
+import {
+  events,
+  userSchema,
+  mentorSchema,
+  menteeSchema,
+  sprintSchema,
+  goalsSchema,
+  sprintTemplateSchema,
+  goalTemplatesSchema,
+  layoutSchema,
+  homeSchema,
+  loginSchema,
+  currentUser,
+} from "./mm-config-entities";
 
 export const config: Config = {
   name: "mentor-mee",
@@ -268,9 +44,7 @@ export const config: Config = {
     sprintTemplateSchema,
     goalTemplatesSchema,
   ],
-  simpleEntities: [
-    layoutSchema
-  ],
+  stateEntities: [layoutSchema, currentUser],
   detached: {
     home: homeSchema,
     login: loginSchema,

@@ -90,7 +90,7 @@ const prepareEntities = (dataEntities: Schema[]) => [
   })),
 ]
 
-export const prepareConfig = ({ dataEntities, events, simpleEntities, ...config }: Config) => ({
+export const prepareConfig = ({ dataEntities, events, stateEntities, ...config }: Config) => ({
   ...config,
   dataEntities: [
     ...dataEntities.map((entity) => ({
@@ -101,7 +101,7 @@ export const prepareConfig = ({ dataEntities, events, simpleEntities, ...config 
     })),
   ],
   events: prepareEntities(events),
-  simpleEntities: prepareEntities(simpleEntities),
+  stateEntities: prepareEntities(stateEntities),
 });
 
 export const translate = (template: any, config: Config, other?: any) =>

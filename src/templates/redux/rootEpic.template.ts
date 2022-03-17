@@ -8,12 +8,12 @@ const generate = (config: Config) => {
   const template = `
 import { createEpicMiddleware, combineEpics } from "redux-observable";
 import { catchError } from "rxjs/operators";
-{{#each entities}}
+{{#each dataEntities}}
 import {{this.variations.ref}}Epic from './{{this.variations.ref}}.epics';
 {{/each}}
 
 const epics = [
-{{#each entities}}
+{{#each dataEntities}}
   ...{{this.variations.ref}}Epic,
 {{/each}}
 ];

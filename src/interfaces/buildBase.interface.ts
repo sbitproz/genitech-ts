@@ -36,7 +36,6 @@ export const DateTimeTypes: string[] = [TypeOptions.date, TypeOptions.dateTime];
 export interface Schema {
   model: string;
   modelPlural: string;
-  disableData?: boolean;
   single?: boolean;
   variations?: NameVariations;
   pkField?: Field;
@@ -78,7 +77,7 @@ export interface Config {
   dependencies?: string[];
   libs?: string[];
   dataEntities?: Schema[];
-  simpleEntities?: Schema[];
+  stateEntities?: Schema[];
   events?: Schema[];
   detached?: {
     [key: string]: Schema;

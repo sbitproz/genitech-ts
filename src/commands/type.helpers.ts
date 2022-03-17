@@ -20,7 +20,7 @@ export const typeGenerators = (config: Config) => [
     func: generatorOther(
       GeneratorLibrary,
       MODULE.INTERFACE,
-      [...typeEntityFiles(config.simpleEntities), ...typeEntityFiles(config.dataEntities)]
+      [...typeEntityFiles(config.stateEntities), ...typeEntityFiles(config.dataEntities)]
     ),
     params: { config },
   },
