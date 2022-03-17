@@ -8,7 +8,7 @@ const generate = (config: Config, entity: Schema) => {
   const template = `
 export interface {{model}} {
 {{#each fields}}
-{{this.fieldname}}: {{calculateTypes this.type}};
+  {{this.fieldname}}: {{calculateTypes this.type}};
 {{/each}}
 }
   `
