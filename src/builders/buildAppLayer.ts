@@ -1,6 +1,6 @@
 import { Config } from "@interfaces/buildBase.interface";
 import { prepareConfig } from "./buildBase";
-import { getZip, zipPackageElement } from "../commands/package.helpers";
+import { getZip, zipPackageElement } from "../commands/core/package.helpers";
 import { uiGenerators } from "@commands/ui.helpers";
 import { appGenerators } from "@commands/app.helpers";
 import { authGenerators } from "@commands/auth.helpers";

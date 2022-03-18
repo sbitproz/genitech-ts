@@ -1,7 +1,7 @@
 import { Config } from "@interfaces/buildBase.interface";
 import { prepareConfig } from "./buildBase";
-import { getZip, zipPackageElement } from "../commands/package.helpers";
-import { reduxEventsGenerators } from "../commands/reduxEvents.helpers";
+import { getZip, zipPackageElement } from "../commands/core/package.helpers";
+import { reduxEventsGenerators } from "../commands/redux/reduxEvents.helpers";
 
 export const commands = (sourceConfig: Config) => {
   const zip = getZip();

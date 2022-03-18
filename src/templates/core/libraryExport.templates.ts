@@ -1,6 +1,6 @@
 import { Config } from "@interfaces/buildBase.interface";
 import { translate } from "builders/buildBase";
-import { moduleRootLocation } from "commands/package.helpers";
+import { moduleRootLocation } from "commands/core/package.helpers";
 import { Generator } from "@interfaces/template.interface";
 
 const generate = (config: Config, module: string, files: string[], barrelDirSuffix: string = '', relativeImportLocation?: string) => {
