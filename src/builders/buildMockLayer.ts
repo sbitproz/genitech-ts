@@ -1,7 +1,7 @@
 import { Config } from "@interfaces/buildBase.interface";
 import { prepareConfig } from "./buildBase";
 import { getZip, zipPackageElement } from "../commands/core/package.helpers";
-import { mockGenerators } from "@commands/mock.helpers";
+import { mockGenerators } from "@commands/data/mock.helpers";
 
 export const commands = (sourceConfig: Config) => {
   const zip = getZip();
