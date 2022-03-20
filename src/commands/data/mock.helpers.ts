@@ -30,6 +30,11 @@ const filterEntityWithFields = (entity: Schema) => entity.fields?.length;
 const createEntityArrayOfRecords = (Generator: GeneratorEntity, config: Config) =>
   (entity: Schema) => `"${entity.variations.refs}": [${Generator.generate(config, entity)}]`;
 
+const log = (item: any) => {
+  console.log(item);
+  return item
+}
+
 export const mockGeneratorEntity =
   (Generator: GeneratorEntity) => (config: Config) => ({
     title: "Mock Data",
@@ -37,6 +42,7 @@ export const mockGeneratorEntity =
     template: `{ ${config.dataEntities
       .filter(filterEntityWithFields)
       .map(createEntityArrayOfRecords(Generator, config))
+      // .map(log)
       .join(",")}}`,
   });
 
@@ -61,9 +67,9 @@ const MockGenerator = {
 
     // generate data
     return Array(MAX_SEED_COUNT).fill("")
-      .map(() => {
+      .map((_,recordIndex) => {
         return `{${(entity.fields || []).map(
-          ({ fieldname: name, type }, idx) => `"${name}": ${getData(name, idx, type)}`
+          ({ fieldname: name, type }) => `"${name}": ${getData(name, recordIndex, type)}`
         ).join(',')}}`;
       })
     }
