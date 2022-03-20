@@ -47,7 +47,7 @@ const MockGenerator = {
     // create placeholder ids
     const ids = Array(MAX_SEED_COUNT).fill("").map(_ => faker.datatype.uuid());
 
-    // choos between real fake data and id fields from pool of placeholder ids
+    // choose between real fake data and id fields from pool of placeholder ids
     const getData = (fieldname: string, idx: number, type: FieldTypes) => {
       if (fieldname === 'id' && type === 'uuid' ) {
         return `"${ids[idx]}"`

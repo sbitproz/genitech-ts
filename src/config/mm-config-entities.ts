@@ -69,7 +69,7 @@ export const sprintSchema: Schema = {
       type: "lorem",
     },
     {
-      fieldname: "profileDescription",
+      fieldname: "description",
       type: "lorem",
     },
   ],
