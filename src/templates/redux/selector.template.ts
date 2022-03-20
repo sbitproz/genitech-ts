@@ -14,16 +14,16 @@ const { selectAll, selectEntities, selectById: select{{model}}ById, selectIds: s
 
 export { select{{model}}ById, select{{model}}ByIds };
 
-export const get{{models}}Slice = (rootState: RootState): {{model}}Slice =>
+export const get{{models}} = (rootState: RootState): {{model}}Slice =>
   rootState[{{constants}}_SLICE_FEATURE_KEY];
 
-export const selectAll{{models}}Slice = createSelector(
-  get{{models}}Slice,
+export const selectAll{{models}} = createSelector(
+  get{{models}},
   selectAll
 );
 
 export const select{{model}}Entities = createSelector(
-  get{{models}}Slice,
+  get{{models}},
   selectEntities
 );
 `
