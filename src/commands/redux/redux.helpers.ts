@@ -17,25 +17,24 @@ import { Config, Schema } from "@interfaces/buildBase.interface";
 import { MODULE } from "@config/module.constants";
 import GeneratorReducer from "@templates/redux/reducerEntity.template";
 import GeneratorSimpleSelector from "@templates/redux/simpleSelector.template";
+import GeneratorStoreHooks from "@templates/redux/storeHooks.template";
 
-const extensions = (config: Config) => ["slice", "selectors"]
-  .concat(config.reduxObservable ? ["epics"] : [])
-  .concat(config.reduxSaga ? ["saga"] : [])
+const extensions = (config: Config) =>
+  ["slice", "selectors"]
+    .concat(config.reduxObservable ? ["epics"] : [])
+    .concat(config.reduxSaga ? ["saga"] : []);
 
-const reduceEntitiesLocations = (entities: Schema[], extensions: string[]) => entities.reduce(
-  (files, entity) => {
+const reduceEntitiesLocations = (entities: Schema[], extensions: string[]) =>
+  entities.reduce((files, entity) => {
     const { ref } = entity.variations;
     return [...files, ...extensions.map((ext) => `${ref}/${ref}.${ext}`)];
-  },
-  []
-)
+  }, []);
 
-const reduxEntityFiles = (config: Config) =>
-  [
-    ...reduceEntitiesLocations(config.dataEntities, extensions(config)),
-    ...reduceEntitiesLocations(config.stateEntities, ['reducer', 'selectors']),
-    ...["store", 'events']
-  ];
+const reduxEntityFiles = (config: Config) => [
+  ...reduceEntitiesLocations(config.dataEntities, extensions(config)),
+  ...reduceEntitiesLocations(config.stateEntities, ["reducer", "selectors"]),
+  ...["store", "events", "store.hooks"],
+];
 
 const reduxObservable = (config: Config) =>
   config.reduxObservable
@@ -46,16 +45,16 @@ const reduxObservable = (config: Config) =>
     : [];
 
 const reduxSagas = (config: Config) =>
-    config.reduxSaga
-      ? [
-          { func: generatorEntity(GeneratorSaga), params: { config } },
-          { func: generatorEntity(GeneratorRootSaga), params: { config } },
-        ]
-      : [];
-  
+  config.reduxSaga
+    ? [
+        { func: generatorEntity(GeneratorSaga), params: { config } },
+        { func: generatorEntity(GeneratorRootSaga), params: { config } },
+      ]
+    : [];
 
 export const reduxGenerators = (config: Config) => [
   { func: generatorCore(GeneratorCore), params: { config } },
+  { func: generatorCore(GeneratorStoreHooks), params: { config } },
   { func: generatorEntity(GeneratorSlice), params: { config } },
   { func: generatorEntity(GeneratorSelector), params: { config } },
   { func: generatorSimpleEntity(GeneratorReducer), params: { config } },
