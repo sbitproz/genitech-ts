@@ -13,41 +13,69 @@ import {
   EntityState
 } from '@reduxjs/toolkit';
 import { {{model}} } from '@{{name}}/core-types';
+import {
+  loadedStatus,
+  loadedStatusFactory,
+  loadingStatus,
+  LoadingStatus
+} from '../redux.types';
     
 export const {{constants}}_SLICE_FEATURE_KEY = '{{refs}}';
 
 export interface {{model}}Slice extends EntityState<{{model}}> {
   selectedId?: string | number; // which {{models}} record has been selected
-  loadingStatus: 'not loaded' | 'loading' | 'loaded' | 'error';
+  loadingStatus: LoadingStatus;
   error?: string;
 }
 
 export const {{ref}}SliceAdapter = createEntityAdapter<{{model}}>();
 
 const initialState: {{model}}Slice = {{ref}}SliceAdapter.getInitialState({
-  loadingStatus: 'not loaded',
+  loadingStatus: 'idle',
   error: undefined,
 });
+
+const upsertManyLoadedStatus = loadedStatusFactory<{{model}}Slice, {{model}}[]>({{ref}}SliceAdapter.upsertMany);
   
 export const {{ref}}Slice = createSlice({
   name: {{constants}}_SLICE_FEATURE_KEY,
   initialState: initialState,
   reducers: {
-    {{ref}}Added: {{ref}}SliceAdapter.addOne,
-    {{ref}}Removed: {{ref}}SliceAdapter.removeOne,
-    {{ref}}Updated: {{ref}}SliceAdapter.updateOne,
-    {{ref}}Fetched: {{ref}}SliceAdapter.upsertOne,
-    {{refs}}Listed: {{ref}}SliceAdapter.upsertMany,
+    {{ref}}Added: (state, action) => {
+      loadedStatus(state, action, {{ref}}SliceAdapter.addOne)
+    }, 
+    {{ref}}Removed: (state, action) => {
+      loadedStatus(state, action, {{ref}}SliceAdapter.removeOne)
+    }, 
+    {{ref}}Updated: (state, action) => {
+      loadedStatus(state, action, {{ref}}SliceAdapter.updateOne)
+    }, 
+    {{ref}}Fetched: (state, action) => {
+      loadedStatus(state, action, {{ref}}SliceAdapter.upsertOne)
+    },
+    {{refs}}Listed: upsertManyLoadedStatus,
     {{#each fkFields}}
-    {{@root.ref}}By{{model}}Listed: {{@root.ref}}SliceAdapter.upsertMany,
+    {{@root.ref}}By{{model}}Listed: upsertManyLoadedStatus,
     {{/each}} 
-    removalAll{{model}}: {{ref}}SliceAdapter.removeAll,
+    removalAll{{model}}: (state, action) => {
+      loadedStatus(state, action, {{ref}}SliceAdapter.removeAll)
+    },
+    list{{models}}: (state) => loadingStatus(state),
+    fetch{{model}}: (state, _) => loadingStatus(state),
+    add{{model}}: (state, _) => loadingStatus(state),
+    remove{{model}}: (state, _) => loadingStatus(state),
+    update{{model}}: (state, _) => loadingStatus(state),    
   },
 });
 
 export default {{ref}}Slice.reducer;
 
 export const { 
+  add{{model}},
+  remove{{model}},
+  update{{model}},
+  list{{model}}s, 
+  fetch{{model}},
   {{ref}}Added, 
   {{ref}}Removed, 
   {{ref}}Updated, 
@@ -57,16 +85,6 @@ export const {
   {{@root.ref}}By{{model}}Listed,
   {{/each}} 
 } = {{ref}}Slice.actions;
-
-export const add{{model}} = createAction<{{model}}>('{{refs}}/add{{model}}');
-
-export const remove{{model}} = createAction<{id: string}>('{{refs}}/remove{{model}}');
-
-export const update{{model}} = createAction<{{model}}>('{{refs}}/update{{model}}');
-
-export const fetch{{model}} = createAction<{id: string}>('{{refs}}/fetch{{model}}');
-
-export const list{{models}} = createAction('{{refs}}/list{{models}}');
 
 export const add{{model}}Error = createAction<string>('{{refs}}/add{{model}}Error');
 

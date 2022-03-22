@@ -9,7 +9,7 @@ const generate = (config: Config, entity: Schema) => {
 import { call, put, takeLatest, CallEffect } from 'redux-saga/effects'
 import { PayloadAction } from '@reduxjs/toolkit';
 import { {{refs}}API, BaseEntity } from '@{{name}}/core-data';
-import { PutPayload } from "../saga.types";
+import { PutPayload } from "../redux.types";
 import { 
   fetch{{model}}, fetch{{model}}Error, {{ref}}Fetched, 
   list{{models}}, list{{models}}Error, {{refs}}Listed,

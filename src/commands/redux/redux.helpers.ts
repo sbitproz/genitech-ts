@@ -3,7 +3,7 @@ import GeneratorEpic from "@templates/redux/epicEntity.template";
 import GeneratorRootEpic from "@templates/redux/rootEpic.template";
 import GeneratorSaga from "@templates/redux/sagaEntity.template";
 import GeneratorRootSaga from "@templates/redux/rootSaga.template";
-import GeneratorSagaTypes from "@templates/redux/sagaTypes.template";
+import GeneratorSagaTypes from "@templates/redux/reduxTypes.template";
 import GeneratorSelector from "@templates/redux/selector.template";
 import GeneratorLibrary from "@templates/core/libraryExport.templates";
 import GeneratorCore from "@templates/redux/rootRedux.template";
