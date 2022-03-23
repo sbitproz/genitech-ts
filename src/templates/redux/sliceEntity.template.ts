@@ -17,12 +17,14 @@ import {
   loadedStatus,
   loadedStatusFactory,
   loadingStatus,
-  LoadingStatus
+  LoadingStatus,
+  loadErrorStatus,
+  GeneralState
 } from '../redux.types';
     
 export const {{constants}}_SLICE_FEATURE_KEY = '{{refs}}';
 
-export interface {{model}}Slice extends EntityState<{{model}}> {
+export interface {{model}}Slice extends EntityState<{{model}}>, GeneralState {
   selectedId?: string | number; // which {{models}} record has been selected
   loadingStatus: LoadingStatus;
   error?: string;
@@ -65,6 +67,15 @@ export const {{ref}}Slice = createSlice({
     add{{model}}: (state, _) => loadingStatus(state),
     remove{{model}}: (state, _) => loadingStatus(state),
     update{{model}}: (state, _) => loadingStatus(state),    
+    add{{model}}Error: loadErrorStatus,
+    remove{{model}}Error: loadErrorStatus,
+    update{{model}}Error: loadErrorStatus,
+    fetch{{model}}Error: loadErrorStatus,
+    list{{models}}Error: loadErrorStatus,
+    {{#each fkFields}}
+    list{{@root.models}}By{{model}}: (state, _) => loadingStatus(state),
+    list{{@root.models}}By{{model}}Error: loadErrorStatus,
+    {{/each}} 
   },
 });
 
@@ -74,7 +85,7 @@ export const {
   add{{model}},
   remove{{model}},
   update{{model}},
-  list{{model}}s, 
+  list{{models}}, 
   fetch{{model}},
   {{ref}}Added, 
   {{ref}}Removed, 
@@ -82,26 +93,17 @@ export const {
   {{refs}}Listed, 
   {{ref}}Fetched, 
   {{#each fkFields}}
+  list{{@root.models}}By{{model}},
   {{@root.ref}}By{{model}}Listed,
+  list{{@root.models}}By{{model}}Error,
   {{/each}} 
+  add{{model}}Error,
+  remove{{model}}Error,
+  update{{model}}Error,
+  fetch{{model}}Error,
+  list{{models}}Error,
 } = {{ref}}Slice.actions;
 
-export const add{{model}}Error = createAction<string>('{{refs}}/add{{model}}Error');
-
-export const remove{{model}}Error = createAction<string>('{{refs}}/remove{{model}}Error');
-
-export const update{{model}}Error = createAction<string>('{{refs}}/update{{model}}Error');
-
-export const fetch{{model}}Error = createAction<string>('{{refs}}/fetch{{model}}Error');
-
-export const list{{models}}Error = createAction<string>('{{refs}}/list{{models}}Error');
-
-{{#each fkFields}}
-export const list{{@root.model}}By{{model}}Error = createAction<string>('{{@root.ref}}/list{{@root.model}}By{{model}}Error');
-
-export const list{{@root.model}}By{{model}} = createAction<{ {{fieldname}}: string}>('{{@root.ref}}/listBy{{model}}')
-
-{{/each}} 
 
 `
   return {

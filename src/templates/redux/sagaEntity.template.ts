@@ -16,8 +16,8 @@ import {
   {{ref}}Updated , update{{model}}Error, update{{model}},
   remove{{model}}Error, remove{{model}}, {{ref}}Removed,
   {{#each fkFields}}
-  list{{@root.model}}By{{model}},
-  list{{@root.model}}By{{model}}Error,
+  list{{@root.models}}By{{model}},
+  list{{@root.models}}By{{model}}Error,
   {{@root.ref}}By{{this.model}}Listed,
   {{/each}}
 } from './{{ref}}.slice';
@@ -66,7 +66,7 @@ function* listBy{{model}}Saga(action: PayloadAction<{ {{ref}}: {{calculateTypes 
       yield put({{@root.ref}}By{{model}}Listed({{@root.ref}}));
       
   } catch (e: any) {
-      yield put(list{{@root.model}}By{{model}}Error(e.message));
+      yield put(list{{@root.models}}By{{model}}Error(e.message));
   }
 }
 
@@ -78,7 +78,7 @@ function* {{ref}}Saga() {
   yield takeLatest(update{{model}}, update{{model}}Saga);
   yield takeLatest(remove{{model}}, remove{{model}}Saga);
   {{#each fkFields}}
-  yield takeLatest(list{{@root.model}}By{{model}}, listBy{{model}}Saga);
+  yield takeLatest(list{{@root.models}}By{{model}}, listBy{{model}}Saga);
   {{/each}}   
 }
 
