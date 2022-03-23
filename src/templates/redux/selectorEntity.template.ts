@@ -26,6 +26,11 @@ export const select{{model}}Entities = createSelector(
   get{{models}},
   selectEntities
 );
+
+export const select{{model}}LoadingStatus = createSelector(
+  get{{models}},
+  ({loadingStatus, error}) => ({ loadingStatus, error })
+);
 `
   return {
     template: translate(template, config, entity),
