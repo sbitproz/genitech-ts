@@ -88,9 +88,14 @@ const prepareEntities = (dataEntities: Schema[]) => [
     variations: buildNameVariation(entity),
     fields: fieldNameVariation(entity.fields),
   })),
-]
+];
 
-export const prepareConfig = ({ dataEntities, events, stateEntities, ...config }: Config) => ({
+export const prepareConfig = ({
+  dataEntities,
+  events,
+  stateEntities,
+  ...config
+}: Config) => ({
   ...config,
   dataEntities: [
     ...dataEntities.map((entity) => ({
