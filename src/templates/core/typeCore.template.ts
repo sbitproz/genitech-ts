@@ -7,6 +7,11 @@ import { GeneratorEntity } from "@interfaces/template.interface";
 const generate = (config: Config) => {
   const template = `
 export type TypeOrNull<T> = T | null;
+
+export type LabelValue = {
+  label: string;
+  value: number | string;
+}
   `
   return {
     template: translate(template,config),

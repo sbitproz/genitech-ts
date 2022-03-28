@@ -11,6 +11,7 @@ import {
   goalTemplatesSchema,
   layoutSchema,
   homeSchema,
+  globalFiltersSchema,
   loginSchema,
   currentUser,
 } from "./mm-config-entities";
@@ -44,7 +45,7 @@ export const config: Config = {
     sprintTemplateSchema,
     goalTemplatesSchema,
   ],
-  stateEntities: [layoutSchema, currentUser],
+  stateEntities: [layoutSchema, currentUser, globalFiltersSchema],
   detached: {
     home: homeSchema,
     login: loginSchema,

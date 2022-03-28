@@ -160,12 +160,31 @@ export const currentUser: Schema = {
       type: "fullname",
     },
     {
+      fieldname: "avatar",
+      type: "avatar",
+    },
+    {
       fieldname: "email",
       type: "email",
     },
     {
       fieldname: "lastLogin",
       type: "date",
+    },
+  ],
+};
+
+export const globalFiltersSchema: Schema = {
+  model: "globalFilter",
+  modelPlural: "globalFilters",
+  fields: [
+    {
+      fieldname: "search",
+      type: "string",
+    },
+    {
+      fieldname: "mentors",
+      type: "array",
     },
   ],
 };
@@ -204,6 +223,10 @@ export const userSchema: Schema = {
     {
       fieldname: "lastLogin",
       type: "date",
+    },
+    {
+      fieldname: "avatar",
+      type: "avatar",
     },
   ],
 };

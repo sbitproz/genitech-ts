@@ -11,6 +11,8 @@ export enum TypeOptions {
   password = 'password',
   date = 'date',
   dateTime = 'dateTime',
+  array = 'array',
+  avatar = 'avatar',
 }
 
 export type FieldTypes = `${TypeOptions}`;

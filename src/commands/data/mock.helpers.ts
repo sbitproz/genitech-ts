@@ -20,7 +20,8 @@ const generateFieldValue = (type: FieldTypes) => ({
   string: `"${faker.lorem.sentence()}"`,
   password: `"${faker.internet.password()}"`,
   boolean: `"${faker.datatype.boolean()}"`,
-  date: `"${faker.datatype.datetime().getDate()}"`
+  date: `"${faker.datatype.datetime().getDate()}"`,
+  avatar: `"${faker.internet.avatar()}"`,
 })[type];
 
 const addCommaSeparator = addSeparator(",", "");

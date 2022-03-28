@@ -4,6 +4,7 @@ import { Generator } from "@interfaces/template.interface";
 import { MODULE } from "@config/module.constants";
 
 const generateTsLibrary = (name: string) => `nx generate @nrwl/workspace:library --name=${name} --buildable &&`
+const generateReactLibrary = (name: string) => `nx g @nrwl/react:library --name=${name} --buildable &&`
 
 const generate = (config: Config) => {
   const template = 
@@ -23,7 +24,8 @@ ${generateTsLibrary(MODULE.INTERFACE)}
 ${generateTsLibrary(MODULE.DATA)}
 ${generateTsLibrary(MODULE.AUTH)}
 
-nx g @nrwl/react:library --name=${MODULE.UI} --buildable &&
+${generateReactLibrary(MODULE.UI)}
+${generateReactLibrary(MODULE.HOOKS)}
 
 yarn add @mui/material@^5.4.0 @mui/icons-material@^5.3.1 @mui/styled-engine-sc @emotion/react@^11.7.1 @emotion/styled@^11.6.0 polished@^4.1.4 && 
 
