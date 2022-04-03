@@ -2,7 +2,7 @@ import { Config } from "@interfaces/buildBase.interface";
 import { translate } from "builders/buildBase";
 import { Generator } from "@interfaces/template.interface";
 import { appRootLocation } from "@commands/core/package.helpers";
-import { MODULE } from "@config/module.constants";
+import { MODULE } from "@config/core/module.constants";
 
 const generate = (config: Config) => {
   const template = `

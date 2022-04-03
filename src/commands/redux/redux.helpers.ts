@@ -14,7 +14,7 @@ import {
   generatorSimpleEntity,
 } from "builders/generatorRunner";
 import { Config, Schema } from "@interfaces/buildBase.interface";
-import { MODULE } from "@config/module.constants";
+import { MODULE } from "@config/core/module.constants";
 import GeneratorReducer from "@templates/redux/reducerEntity.template";
 import GeneratorSimpleSelector from "@templates/redux/simpleSelector.template";
 import GeneratorStoreHooks from "@templates/redux/storeHooks.template";

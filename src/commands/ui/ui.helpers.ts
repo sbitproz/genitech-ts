@@ -6,7 +6,7 @@ import GeneratorThemeTypings from "@templates/ui/themeTypings.templates";
 import GeneratorTheme from "@templates/ui/theme.templates";
 import GeneratorLibrary from "@templates/core/libraryExport.templates";
 import { generatorCore, generatorOther } from "builders/generatorRunner";
-import { MODULE } from "@config/module.constants";
+import { MODULE } from "@config/core/module.constants";
 
 export const uiGenerators = (config: Config) => [
   { func: generatorCore(GeneratorTheme), params: { config } },

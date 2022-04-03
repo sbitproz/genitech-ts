@@ -1,4 +1,4 @@
-import { MODULE } from "@config/module.constants";
+import { MODULE } from "@config/core/module.constants";
 import {
   Config,
   BooleanTypes,
@@ -6,22 +6,27 @@ import {
   Schema,
 } from "@interfaces/buildBase.interface";
 import GeneratorEntity from "@templates/core/typeEntity.template";
-import { generatorEntity, generatorSimpleEntity, generatorOther } from "builders/generatorRunner";
+import {
+  generatorEntity,
+  generatorSimpleEntity,
+  generatorOther,
+} from "builders/generatorRunner";
 import GeneratorLibrary from "@templates/core/libraryExport.templates";
 import GeneratorCore from "@templates/core/typeCore.template";
 
 const typeEntityFiles = (entities: Schema[] = []) =>
-  entities.map((entity) => `${entity.variations.ref}.interfaces`);
+  entities
+    .map((entity) => `${entity.variations.ref}.interfaces`)
+    .concat("core.interfaces");
 
 export const typeGenerators = (config: Config) => [
   { func: generatorEntity(GeneratorEntity), params: { config } },
   { func: generatorSimpleEntity(GeneratorEntity), params: { config } },
   {
-    func: generatorOther(
-      GeneratorLibrary,
-      MODULE.INTERFACE,
-      [...typeEntityFiles(config.stateEntities), ...typeEntityFiles(config.dataEntities)]
-    ),
+    func: generatorOther(GeneratorLibrary, MODULE.INTERFACE, [
+      ...typeEntityFiles(config.stateEntities),
+      ...typeEntityFiles(config.dataEntities),
+    ]),
     params: { config },
   },
   { func: generatorOther(GeneratorCore), params: { config } },

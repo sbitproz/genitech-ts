@@ -1,4 +1,4 @@
-import { MODULE } from "@config/module.constants";
+import { MODULE } from "@config/core/module.constants";
 import { Config, FieldTypes, Schema } from "@interfaces/buildBase.interface";
 import { GeneratorEntity } from "@interfaces/template.interface";
 import { faker } from '@faker-js/faker';

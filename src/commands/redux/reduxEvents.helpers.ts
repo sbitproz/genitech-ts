@@ -1,7 +1,7 @@
 import GeneratorLibrary from "@templates/core/libraryExport.templates";
 import { generatorOther, generatorEvents, generatorEntity } from "builders/generatorRunner";
 import { Config } from "@interfaces/buildBase.interface";
-import { MODULE } from "@config/module.constants";
+import { MODULE } from "@config/core/module.constants";
 import EventSagaGenerator from "@templates/events/reduxEventSagas.template";
 import EventActionsGenerator from "@templates/events/reduxEventActions.template";
 import GeneratorRootSaga from "@templates/redux/rootSaga.template";

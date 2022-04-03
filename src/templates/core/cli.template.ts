@@ -1,7 +1,7 @@
 import { Config } from "@interfaces/buildBase.interface";
 import { translate } from "builders/buildBase";
 import { Generator } from "@interfaces/template.interface";
-import { MODULE } from "@config/module.constants";
+import { MODULE } from "@config/core/module.constants";
 
 const generateTsLibrary = (name: string) => `nx generate @nrwl/workspace:library --name=${name} --buildable &&`
 const generateReactLibrary = (name: string) => `nx g @nrwl/react:library --name=${name} --buildable &&`

@@ -72,7 +72,7 @@ export interface Config {
   firebase?: boolean;
   firebaseAPI?: boolean;
   application: string;
-  scope: string;
+  scope?: string;
   type: string;
   baseEndpoint: string;
   packages?: string[];

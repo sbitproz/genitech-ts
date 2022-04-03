@@ -1,4 +1,4 @@
-import { config } from "@config/mm-config";
+import { config } from "@config/mentor-mee/config";
 import { commands } from "@builders/buildEntityLayer";
 import 'handlebars/helpers';
 

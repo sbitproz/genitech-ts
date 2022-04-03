@@ -8,7 +8,6 @@ const generate = (config: Config, module: string, files: string[], barrelDirSuff
   {{#each files}}  
 export * from './${relativeImportLocation ?? 'lib/'}{{this}}';
   {{/each}}
-export * from './lib/core.interfaces';  
   `
 
   return {
