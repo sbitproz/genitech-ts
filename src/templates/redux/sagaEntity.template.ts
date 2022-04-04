@@ -60,7 +60,7 @@ function* remove{{model}}Saga(action: PayloadAction<BaseEntity>): Generator<Call
 }
 
 {{#each fkFields}}
-function* listBy{{model}}Saga(action: PayloadAction<{ {{ref}}: {{calculateTypes type}} }>): Generator<CallEffect | PutPayload<any> | PutPayload<string>, void, {{@root.model}}[]> {
+function* listBy{{model}}Saga(action: PayloadAction<{ {{ref}}: {{calculateTypes type arrayEntity}} }>): Generator<CallEffect | PutPayload<any> | PutPayload<string>, void, {{@root.model}}[]> {
   try {
       const {{@root.ref}} = yield call({{@root.refs}}API.loadBy, '{{fieldname}}', action.payload.{{fieldname}});
       yield put({{@root.ref}}By{{model}}Listed({{@root.ref}}));

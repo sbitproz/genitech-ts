@@ -4,6 +4,8 @@ import {
   BooleanTypes,
   NumberTypes,
   Schema,
+  TypeOptions,
+  Field,
 } from "@interfaces/buildBase.interface";
 import GeneratorEntity from "@templates/core/typeEntity.template";
 import {
@@ -13,6 +15,7 @@ import {
 } from "builders/generatorRunner";
 import GeneratorLibrary from "@templates/core/libraryExport.templates";
 import GeneratorCore from "@templates/core/typeCore.template";
+import { buildRef } from "@builders/buildBase";
 
 const typeEntityFiles = (entities: Schema[] = []) =>
   entities
@@ -32,9 +35,33 @@ export const typeGenerators = (config: Config) => [
   { func: generatorOther(GeneratorCore), params: { config } },
 ];
 
-export const calculateTypes = (type: string) =>
-  NumberTypes.indexOf(type) !== -1
+export const calculateTypes = (type: TypeOptions, entity?: string) => {
+  const entityModel = entity && buildRef(entity).model;
+
+  return NumberTypes.indexOf(type) !== -1
     ? "number"
+    : type === "array"
+    ? "string[]"
+    : type === "array:entity"
+    ? `${entityModel}[]`
     : BooleanTypes.indexOf(type) !== -1
     ? "boolean"
     : "string";
+};
+
+export const calculateTypeImports = (fields: Field[]) => {
+  const extractUniqueModels = fields.filter(
+    (item, index, array) => !item.arrayEntity ? false :
+      array.findIndex(
+        (originItem) => originItem.arrayEntity === item.arrayEntity
+      ) === index
+  );
+
+  return extractUniqueModels
+    .map(
+      (field) => {
+        const names = buildRef(field.arrayEntity)
+        return `import { ${names.model} } from "./${names.ref}.interfaces";`
+      }
+    )
+};

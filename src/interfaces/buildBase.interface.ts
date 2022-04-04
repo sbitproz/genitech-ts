@@ -12,6 +12,7 @@ export enum TypeOptions {
   date = 'date',
   dateTime = 'dateTime',
   array = 'array',
+  arrayEntity = 'array:entity',
   avatar = 'avatar',
 }
 
@@ -20,6 +21,7 @@ export type FieldTypes = `${TypeOptions}`;
 export type Field = {
   fieldname: string;
   type: FieldTypes;
+  arrayEntity?: string;
   ref?: string;
   model?: string;
   constant?: string;

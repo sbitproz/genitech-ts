@@ -6,9 +6,11 @@ import { GeneratorEntity } from "@interfaces/template.interface";
 
 const generate = (config: Config, entity: Schema) => {
   const template = `
+{{{calculateTypeImports fields}}}
+
 export interface {{model}} {
 {{#each fields}}
-  {{this.fieldname}}: {{calculateTypes this.type}};
+  {{this.fieldname}}: {{calculateTypes this.type this.arrayEntity}};
 {{/each}}
 }
   `

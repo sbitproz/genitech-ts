@@ -68,6 +68,11 @@ const buildFieldBase = (field: Field): FieldVariations => ({
   constant: `${constantCase(field.fieldname)}`,
 });
 
+export const buildRef = (ref: string): FieldVariations => ({
+  ref,
+  model: pascalCase(ref),
+});
+
 const addParams = (variations: NameVariations) => ({
   ...variations,
   singleParam: buildSingleParam(variations),

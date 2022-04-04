@@ -1,5 +1,5 @@
 import Handlebars from "handlebars";
-import { calculateTypes } from "commands/core/type.helpers";
+import { calculateTypeImports, calculateTypes } from "commands/core/type.helpers";
 
 Handlebars.registerHelper("times", function (n, block) {
   var accum = "";
@@ -7,6 +7,11 @@ Handlebars.registerHelper("times", function (n, block) {
   return accum;
 });
 
-Handlebars.registerHelper("calculateTypes", function (value) {
-  return calculateTypes(value);
+Handlebars.registerHelper("calculateTypes", function (value, entity) {
+  return calculateTypes(value, entity);
 });
+
+Handlebars.registerHelper("calculateTypeImports", function (fields) {
+  return calculateTypeImports(fields);
+});
+
