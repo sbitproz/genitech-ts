@@ -26,7 +26,7 @@ export const api = axios.create({
 
 export const unwrapData = (response: AxiosResponse) => response.data
 
-const load = <T>(getUrl: () => string) => () => api.get<T>(\`\${getUrl()}\`).then(unwrapData) as Promise<T[]>
+const load = <T>(getUrl: () => string) => (queryString = '') => api.get<T>(\`\${getUrl()}\${queryString}\`).then(unwrapData) as Promise<T[]>
 
 const loadBy = <T>(getUrlWithFkId: (fieldName: string, id: string) => string) => (fieldName: string, id: string) => api.get<T>(\`\${getUrlWithFkId(fieldName,id)}\`).then(unwrapData) as Promise<T[]>
 

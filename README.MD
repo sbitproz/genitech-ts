@@ -11,10 +11,3 @@
 6. Consider creating the following files
     - more meaty of a private area
     - auth layout file
-
-
-IMMEDIATE
-
-Add avatars to users
-Load in users and avatars
-lookup map for user avatars for 

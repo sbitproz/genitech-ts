@@ -20,6 +20,11 @@ import {
   list{{@root.models}}By{{model}}Error,
   {{@root.ref}}By{{this.model}}Listed,
   {{/each}}
+  {{#each searchableFields}}
+  list{{@root.models}}By{{model}},
+  list{{@root.models}}By{{model}}Error,
+  {{@root.ref}}By{{this.model}}Listed,
+  {{/each}}
 } from './{{ref}}.slice';
 import { {{model}} } from '@{{name}}/core-types';
 
@@ -60,7 +65,7 @@ function* remove{{model}}Saga(action: PayloadAction<BaseEntity>): Generator<Call
 }
 
 {{#each fkFields}}
-function* listBy{{model}}Saga(action: PayloadAction<{ {{ref}}: {{calculateTypes type arrayEntity}} }>): Generator<CallEffect | PutPayload<any> | PutPayload<string>, void, {{@root.model}}[]> {
+function* list{{@root.models}}By{{model}}Saga(action: PayloadAction<{ {{ref}}: {{calculateTypes type arrayEntity}} }>): Generator<CallEffect | PutPayload<any> | PutPayload<string>, void, {{@root.model}}[]> {
   try {
       const {{@root.ref}} = yield call({{@root.refs}}API.loadBy, '{{fieldname}}', action.payload.{{fieldname}});
       yield put({{@root.ref}}By{{model}}Listed({{@root.ref}}));
@@ -72,13 +77,29 @@ function* listBy{{model}}Saga(action: PayloadAction<{ {{ref}}: {{calculateTypes 
 
 {{/each}} 
 
+{{#each searchableFields}}
+function* list{{@root.models}}By{{model}}Saga(action: PayloadAction<{ {{ref}}: {{calculateTypes type arrayEntity}} }>): Generator<CallEffect | PutPayload<any> | PutPayload<string>, void, {{@root.model}}[]> {
+  try {
+      const {{@root.ref}} = yield call({{@root.refs}}API.load, \`?{{fieldname}}_like=\${action.payload.{{fieldname}} }\`);
+      yield put({{@root.ref}}By{{model}}Listed({{@root.ref}}));
+      
+  } catch (e: any) {
+      yield put(list{{@root.models}}By{{model}}Error(e.message));
+  }
+}
+
+{{/each}}
+
 function* {{ref}}Saga() {
   yield takeLatest(fetch{{model}}, fetch{{model}}Saga);
   yield takeLatest(list{{models}}, list{{models}}Saga);
   yield takeLatest(update{{model}}, update{{model}}Saga);
   yield takeLatest(remove{{model}}, remove{{model}}Saga);
   {{#each fkFields}}
-  yield takeLatest(list{{@root.models}}By{{model}}, listBy{{model}}Saga);
+  yield takeLatest(list{{@root.models}}By{{model}}, list{{@root.models}}By{{model}}Saga);
+  {{/each}}   
+  {{#each searchableFields}}
+  yield takeLatest(list{{@root.models}}By{{model}}, list{{@root.models}}By{{model}}Saga);
   {{/each}}   
 }
 

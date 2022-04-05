@@ -36,7 +36,7 @@ export const typeGenerators = (config: Config) => [
 ];
 
 export const calculateTypes = (type: TypeOptions, entity?: string) => {
-  const entityModel = entity && buildRef(entity).model;
+  const entityModel = typeof entity === 'string' && buildRef(entity).model;
 
   return NumberTypes.indexOf(type) !== -1
     ? "number"

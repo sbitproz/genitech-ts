@@ -5,6 +5,7 @@ import {
   FieldVariations,
   NameVariations,
   Schema,
+  SchemaEvents,
 } from "@interfaces/buildBase.interface";
 
 /*
@@ -95,6 +96,15 @@ const prepareEntities = (dataEntities: Schema[]) => [
   })),
 ];
 
+const prepareEvents = (events: SchemaEvents[]) => [
+  ...events.map((event) => ({
+    ...event,
+    variations: buildNameVariation(event),
+  })),
+];
+
+const bySearchableFields = (field: Field) => field.searchable;
+
 export const prepareConfig = ({
   dataEntities,
   events,
@@ -108,9 +118,10 @@ export const prepareConfig = ({
       variations: buildNameVariation(entity),
       fields: [entity.pkField, ...entity.fields, ...(entity.fkFields ?? [])],
       fkFields: fieldNameVariation(entity.fkFields),
+      searchableFields: fieldNameVariation(entity.fields.filter(bySearchableFields)),
     })),
   ],
-  events: prepareEntities(events),
+  events: prepareEvents(events),
   stateEntities: prepareEntities(stateEntities),
 });
 

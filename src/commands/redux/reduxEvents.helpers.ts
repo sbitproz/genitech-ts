@@ -17,7 +17,7 @@ const reduxEntityFiles = (config: Config) =>
   config.events?.reduce(
     (files, event) => {
       const { ref } = event.variations;
-      return [...files, ...extensions(config).map((ext) => `${ref}/${ref}.${ext}`)];
+      return [...files, ...extensions(config).map((ext) => `${event.group}/${ref}/${ref}.${ext}`)];
     },
     []
   );

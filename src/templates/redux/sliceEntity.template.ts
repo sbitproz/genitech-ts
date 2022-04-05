@@ -10,7 +10,8 @@ import {
   createAction,
   createEntityAdapter,
   createSlice,
-  EntityState
+  EntityState,
+  PayloadAction
 } from '@reduxjs/toolkit';
 import { {{model}} } from '@{{name}}/core-types';
 import {
@@ -76,7 +77,16 @@ export const {{ref}}Slice = createSlice({
     list{{@root.models}}By{{model}}: (state, _) => loadingStatus(state),
     list{{@root.models}}By{{model}}Error: loadErrorStatus,
     {{/each}} 
+    {{#each searchableFields}}
+    list{{@root.models}}By{{model}}: (state, action: PayloadAction<{ {{ref}}: {{calculateTypes type}} }>) => loadingStatus(state),
+    {{@root.ref}}By{{model}}Listed: (state, action) => {
+      {{@root.ref}}SliceAdapter.removeAll(state)
+      upsertManyLoadedStatus(state, action)
+    },
+    list{{@root.models}}By{{model}}Error: loadErrorStatus,
+    {{/each}} 
   },
+
 });
 
 export default {{ref}}Slice.reducer;
@@ -93,6 +103,11 @@ export const {
   {{refs}}Listed, 
   {{ref}}Fetched, 
   {{#each fkFields}}
+  list{{@root.models}}By{{model}},
+  {{@root.ref}}By{{model}}Listed,
+  list{{@root.models}}By{{model}}Error,
+  {{/each}} 
+  {{#each searchableFields}}
   list{{@root.models}}By{{model}},
   {{@root.ref}}By{{model}}Listed,
   list{{@root.models}}By{{model}}Error,

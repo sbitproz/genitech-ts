@@ -11,7 +11,7 @@ import { all, fork } from 'redux-saga/effects';
 import {{model}}Saga from './{{model}}/{{model}}.saga';
 {{/each}}      
 {{#each events}}
-import {{model}}EventsSaga from './events/{{model}}/{{model}}.saga';
+import {{model}}EventsSaga from './events/{{group}}/{{model}}/{{model}}.saga';
 {{/each}}
 
 

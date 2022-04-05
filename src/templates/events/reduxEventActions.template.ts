@@ -1,10 +1,10 @@
-import { Config, Schema } from "@interfaces/buildBase.interface";
+import { Config, Schema, SchemaEvents } from "@interfaces/buildBase.interface";
 import { translate } from "builders/buildBase";
 import { moduleLibLocation } from "commands/core/package.helpers";
 import { MODULE } from "@config/core/module.constants";
 import { GeneratorEntity } from "@interfaces/template.interface";
 
-const generate = (config: Config, event: Schema) => {
+const generate = (config: Config, event: SchemaEvents) => {
   const template = `
 import { createAction } from '@reduxjs/toolkit';
 
@@ -21,7 +21,7 @@ export const {{ref}}Success = createAction<{{model}}Success>('{{refs}}/{{ref}}Su
   return {
     template: translate(template,config, event),
     title: `Action events template`,
-    fileName: `${moduleLibLocation(MODULE.STATE)}events/${event.variations.ref}/${event.variations.ref}.actions.ts`,
+    fileName: `${moduleLibLocation(MODULE.STATE)}events/${event.group}/${event.variations.ref}/${event.variations.ref}.actions.ts`,
   };
 };
 

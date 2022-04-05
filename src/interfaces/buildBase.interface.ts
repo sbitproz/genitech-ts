@@ -25,6 +25,7 @@ export type Field = {
   ref?: string;
   model?: string;
   constant?: string;
+  searchable?: boolean;
 }
 
 export const StringTypes: string[] = [TypeOptions.email, TypeOptions.uuid, 
@@ -45,6 +46,13 @@ export interface Schema {
   pkField?: Field;
   fields?: Field[];
   fkFields?: Field[];
+}
+
+export interface SchemaEvents {
+  model: string;
+  modelPlural: string;
+  group: string;
+  variations?: NameVariations;
 }
 
 export interface NameVariations {
@@ -82,7 +90,7 @@ export interface Config {
   libs?: string[];
   dataEntities?: Schema[];
   stateEntities?: Schema[];
-  events?: Schema[];
+  events?: SchemaEvents[];
   detached?: {
     [key: string]: Schema;
   };
