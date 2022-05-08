@@ -11,7 +11,7 @@ import React from 'react';
 import { BrowserRouter as Router, Link, Route, Routes, Outlet } from 'react-router-dom';
 import { APP_ROUTES } from './routes';
 import BaseLayout from './layout/BaseLayout/BaseLayout';
-import { ThemeProvider } from '@{{name}}/core-ui'
+import Providers from './Providers';
 
 const Public = () => (
   <div>
@@ -33,7 +33,7 @@ const Reset = () => <>Reset</>
 
 export function App() {
 return (
-  <ThemeProvider>
+  <Providers>
     <Router>
         <Routes>
         <Route path="/" element={<PrivateRoute />}>
@@ -49,7 +49,7 @@ return (
         <Route path="/another" element={<Public />} />
         </Routes>
     </Router>
-  </ThemeProvider>
+  </Providers>
 );
 }
 

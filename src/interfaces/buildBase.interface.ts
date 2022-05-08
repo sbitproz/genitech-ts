@@ -7,6 +7,7 @@ export enum TypeOptions {
   forename = 'forename',
   lastname = 'lastname',
   fullname = 'fullname',
+  currency = 'currency',
   email = 'email',
   password = 'password',
   date = 'date',

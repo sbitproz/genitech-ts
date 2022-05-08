@@ -1,4 +1,4 @@
-import { config } from "@config/mentor-mee/config";
+import { config } from "@config/fixed-income-markets/config";
 import { commands } from "@builders/buildMockLayer";
 import 'handlebars/helpers';
 

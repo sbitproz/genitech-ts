@@ -1,5 +1,7 @@
 # TODO:
 
+# Add providers file which takes the theme and redux and puts it into the stack
+
 1. Foriegn key look ups
 1.a Date types
 2. Consider developing a firebase data layer

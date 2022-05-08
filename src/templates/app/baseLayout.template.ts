@@ -9,7 +9,7 @@ const generate = (config: Config) => {
 import React from 'react';
 import { Outlet } from 'react-router-dom';
 import { Box, styled } from '@mui/system';
-import { colors } from '{{application}}/${MODULE.UI}';
+import { colors } from '@{{name}}/${MODULE.UI}';
 
 const StyledContent = styled(Box)({
   background: colors.blue100,
@@ -17,25 +17,19 @@ const StyledContent = styled(Box)({
   display: 'flex',
 });
 
-const { StyledContent } = styles;
-
-interface BaseLayoutProps { }
-
-const BaseLayout: React.FC<BaseLayoutProps> = () => {
+const BaseLayout: React.FC = () => {
   return (
-    <>
-      <StyledContent>
-        <Outlet />
-      </StyledContent>
-    </>
+    <StyledContent>
+      <Outlet />
+    </StyledContent>
   );
 };
 
 export default BaseLayout;  
-  `
+  `;
 
   return {
-    template: translate(template,config),
+    template: translate(template, config),
     title: `App builder`,
     fileName: `${appRootLocation(config)}layout/BaseLayout/BaseLayout.tsx`,
   };

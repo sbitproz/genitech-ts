@@ -21,7 +21,9 @@ const generateFieldValue = (type: FieldTypes) => ({
   password: `"${faker.internet.password()}"`,
   boolean: `"${faker.datatype.boolean()}"`,
   date: `"${faker.datatype.datetime().getDate()}"`,
+  number: `"${faker.datatype.number()}"`,
   avatar: `"${faker.internet.avatar()}"`,
+  currency: `"${faker.finance.currencyCode()}"`,
 })[type];
 
 const addCommaSeparator = addSeparator(",", "");
