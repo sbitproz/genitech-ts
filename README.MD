@@ -13,3 +13,6 @@
 6. Consider creating the following files
     - more meaty of a private area
     - auth layout file
+
+
+nx g @nrwl/express:application --dry-run
