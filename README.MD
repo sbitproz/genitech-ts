@@ -1,18 +1,18 @@
-# TODO:
+# Genitech:
 
-# Add providers file which takes the theme and redux and puts it into the stack
+## What does this project do?
 
-1. Foriegn key look ups
-1.a Date types
-2. Consider developing a firebase data layer
-# 3. Consider a way to bleed through queries
-4. Study domain driven development
+Inspired by Rapid Application Development with Code Generation course in Frontend Masters, genitech generates code for your full stack application including:
+- Front-end
+- State management
+- Openings for form generation
+- Data types
+- Seed data 
+- Firebase integration
+- Much more...
 
+With customised templates you have the capability to extend this code generator into any aspect of your project through the designing of a schema.
 
-5. Consider a form generator react-hook-form
-6. Consider creating the following files
-    - more meaty of a private area
-    - auth layout file
+## Instructions on how to use?
 
-
-nx g @nrwl/express:application --dry-run
+To be completed.
